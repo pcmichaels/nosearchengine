@@ -1,7 +1,8 @@
 ﻿import React from 'react';
 
-type SearchProps = {
-    searchText: string    
+interface SearchProps {    
+    searchTextUpdateAction: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    searchAction: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 function Search(props: SearchProps) {
@@ -9,7 +10,8 @@ function Search(props: SearchProps) {
     return (
         <div>
             <label>Search</label>
-            <textarea>{props.searchText}</textarea>
+            <input type='text' onChange={props.searchTextUpdateAction} />
+            <button onClick={props.searchAction}>Search</button>
         </div>
     );
 }

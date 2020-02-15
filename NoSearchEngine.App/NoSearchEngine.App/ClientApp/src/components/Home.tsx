@@ -9,35 +9,43 @@ interface IProps {
 interface IState {
   searchResults: IData[];
   loading: boolean;
+  searchText: string;  
 }
 
 export class Home extends Component<IProps, IState> {
-  static displayName = Home.name;
-  searchText: string = '';
-  loading: boolean;
+  static displayName = Home.name;  
 
   constructor(props: IProps) {    
     super(props);
     this.state = { 
       searchResults: [], 
-      loading: true 
+      loading: true,
+      searchText: ''
     };
+
+    this.updateSearchText = this.updateSearchText.bind(this);
+    this.runSearch = this.runSearch.bind(this);
   }
   
   render () {
     return (
       <div>
-        <Search searchText={this.searchText} />
+        <Search searchAction={this.runSearch}
+          searchTextUpdateAction={this.updateSearchText} />
 
         <SearchResults data={this.state.searchResults} />
       </div>
     );
   }
 
-  async runSearch() {
-    const response = await fetch('search/' + this.searchText);
-    const jsondata : string = await response.json();
-    const data : IData[] = JSON.parse(jsondata)
+  updateSearchText(e: React.ChangeEvent<HTMLInputElement>) {
+    this.setState({searchText: e.target.value});
+  }
+
+  async runSearch(e: React.MouseEvent<HTMLButtonElement>) {
+    const response = await fetch('search/search/' + this.state.searchText);
+    const jsondata: string = await response.json();
+    const data: IData[] = JSON.parse(jsondata)
     this.setState({ searchResults: data, loading: false });
   }
 }
