@@ -3,7 +3,14 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29521.150
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NoSearchEngine.App", "NoSearchEngine.App\NoSearchEngine.App.csproj", "{AC19898B-95DC-4944-829A-FC2B200E892C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NoSearchEngine.App", "NoSearchEngine.App\NoSearchEngine.App.csproj", "{AC19898B-95DC-4944-829A-FC2B200E892C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{933EF5F6-5692-4DEA-A2B8-920740B3BEBD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "adr", "adr", "{800A6917-3771-479A-AA74-EB43BD2D3DF0}"
+	ProjectSection(SolutionItems) = preProject
+		0001-2020-01-22-React.md = 0001-2020-01-22-React.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,6 +25,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{800A6917-3771-479A-AA74-EB43BD2D3DF0} = {933EF5F6-5692-4DEA-A2B8-920740B3BEBD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {83B95BA8-FFAE-4846-A1D5-8AC2F77B30EA}
