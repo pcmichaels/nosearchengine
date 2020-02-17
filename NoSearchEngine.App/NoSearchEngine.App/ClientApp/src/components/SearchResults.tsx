@@ -1,5 +1,5 @@
 import React from 'react';
-import { IData } from './Interfaces';
+import { IData } from './Interfaces/IData';
 
 type SearchResultsProps = {
     data: IData[]
@@ -17,9 +17,9 @@ function SearchResults(props: SearchResultsProps) {
         </thead>
         <tbody>
           {props.data.map(result =>
-            <tr key={result.Url}>
-              <td>{result.Url}</td>
-              <td>{result.Description}</td>
+            <tr key={result.url}>
+              <td>{result.url}</td>
+              <td>{result.description}</td>
             </tr>
           )}
         </tbody>

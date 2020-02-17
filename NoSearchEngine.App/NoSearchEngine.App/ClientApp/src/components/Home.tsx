@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Search from './Search';
 import SearchResults from './SearchResults';
-import { IData } from './Interfaces';
+import { IData } from './Interfaces/IData';
 
 interface IProps {
 }
@@ -43,9 +43,8 @@ export class Home extends Component<IProps, IState> {
   }
 
   async runSearch(e: React.MouseEvent<HTMLButtonElement>) {
-    const response = await fetch('search/search/' + this.state.searchText);
-    const jsondata: string = await response.json();
-    const data: IData[] = JSON.parse(jsondata)
-    this.setState({ searchResults: data, loading: false });
+    const response = await fetch('search/' + this.state.searchText);
+    const jsondata: IData[] = await response.json();
+    this.setState({ searchResults: jsondata, loading: false });
   }
 }

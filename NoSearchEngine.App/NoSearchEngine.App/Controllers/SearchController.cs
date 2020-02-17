@@ -10,7 +10,7 @@ namespace NoSearchEngine.App.Controllers
     [ApiController]
     [Route("[controller]")]
     public class SearchController : ControllerBase
-    {        
+    {
 
         private readonly ILogger<SearchController> _logger;
 
@@ -19,7 +19,7 @@ namespace NoSearchEngine.App.Controllers
             _logger = logger;
         }
 
-        [HttpGet]
+        [HttpGet("{searchText}")]
         public IEnumerable<Resource> Search(string searchText)
         {
             return new List<Resource>()
