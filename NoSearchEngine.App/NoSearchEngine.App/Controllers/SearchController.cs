@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using NoSearchEngine.Models;
+using NoSearchEngine.Service.Interfaces;
 
 namespace NoSearchEngine.App.Controllers
 {
@@ -13,19 +15,20 @@ namespace NoSearchEngine.App.Controllers
     {
 
         private readonly ILogger<SearchController> _logger;
+        private readonly ISearchService _searchService;
 
-        public SearchController(ILogger<SearchController> logger)
+        public SearchController(ILogger<SearchController> logger,
+            ISearchService searchService)
         {
             _logger = logger;
+            _searchService = searchService;
         }
 
         [HttpGet("{searchText}")]
         public IEnumerable<Resource> Search(string searchText)
         {
-            return new List<Resource>()
-            {
-                new Resource() {Description = "Test", Url = "www.test.com"}
-            };
+            var results = _searchService.SearchAll(searchText);
+            return results;
         }
     }
 }

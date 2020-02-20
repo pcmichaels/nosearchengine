@@ -1,6 +1,6 @@
 using System;
 
-namespace NoSearchEngine.App
+namespace NoSearchEngine.Models
 {
     public class Resource
     {
