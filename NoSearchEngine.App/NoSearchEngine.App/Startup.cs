@@ -5,6 +5,9 @@ using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using NoSearchEngine.DataAccess;
+using NoSearchEngine.Service;
+using NoSearchEngine.Service.Interfaces;
 
 namespace NoSearchEngine.App
 {
@@ -28,6 +31,9 @@ namespace NoSearchEngine.App
             {
                 configuration.RootPath = "ClientApp/build";
             });
+
+            services.AddTransient<ISearchService, SearchService>();
+            services.AddTransient<ResourceDataAccess, ResourceDataAccess>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
