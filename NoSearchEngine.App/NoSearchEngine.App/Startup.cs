@@ -33,7 +33,7 @@ namespace NoSearchEngine.App
             });
 
             services.AddTransient<ISearchService, SearchService>();
-            services.AddTransient<ResourceDataAccess, ResourceDataAccess>();
+            services.AddTransient<IResourceDataAccess, ResourceDataAccess>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
