@@ -18,16 +18,14 @@ namespace NoSearchEngine.UnitTests.Service
             string searchText = "should exist";
             string expectedResult = "this test should exist";
 
-            var resourceDataAccess = Substitute.For<ResourceDataAccess>();
+            var resourceDataAccess = Substitute.For<IResourceDataAccess>();
+            var resultSet = Data.SearchResults.GetSingleSearchResult(expectedResult);
             resourceDataAccess.SearchAll(searchText)
-                .Returns(new List<ResourceEntity>()
-                {
-                    new ResourceEntity() { Url = "www.test.com", Description = expectedResult }
-                });
+                .Returns(resultSet);
             var searchService = new SearchService(resourceDataAccess);
 
             // Act
-            var results = searchService.Search(searchText);
+            var results = searchService.SearchAll(searchText);
 
             // Assert
             Assert.Single(results);
