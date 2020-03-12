@@ -38,6 +38,9 @@ namespace NoSearchEngine.App
 
             services.AddDbContext<NoSearchDbContext>(a =>
                 a.UseSqlServer(Configuration.GetConnectionString("SqlConnectionString")));
+
+            services.AddAuthentication()
+                .AddTwitter();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
