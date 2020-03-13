@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { Collapse, Container, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import { LoginMenu } from './api-authorization/LoginMenu';
 import './NavMenu.css';
+
 
 interface INavMenuProps {
 
@@ -47,6 +49,9 @@ export class NavMenu extends Component<INavMenuProps, IState> {
                 <NavItem>
                   <NavLink tag={Link} className="text-dark" to="/fetch-data">Fetch data</NavLink>
                 </NavItem>
+                <LoginMenu>
+                </LoginMenu>
+
               </ul>
             </Collapse>
           </Container>
