@@ -1,4 +1,4 @@
-export const ApplicationName = 'react_app_auth';
+export const ApplicationName = 'NoSearchEngine.App';
 
 export const QueryParameterNames = {
   ReturnUrl: 'returnUrl',

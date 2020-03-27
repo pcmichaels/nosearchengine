@@ -1,6 +1,6 @@
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -24,8 +24,26 @@ namespace NoSearchEngine.App
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<NoSearchDbContext>(a =>
+                a.UseSqlServer(Configuration.GetConnectionString("SqlConnectionString")));
+
+            services.AddDefaultIdentity<ApplicationUserEntity>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddEntityFrameworkStores<NoSearchDbContext>();
+
+            services.AddIdentityServer()
+                .AddApiAuthorization<ApplicationUserEntity, NoSearchDbContext>();
+
+            services.AddAuthentication()
+                .AddTwitter(o =>
+                {
+                    o.ConsumerKey = Configuration["Authentication:Twitter:ConsumerAPIKey"];
+                    o.ConsumerSecret = Configuration["Authentication:Twitter:ConsumerSecret"];
+                    o.RetrieveUserDetails = true;                    
+                })
+                .AddIdentityServerJwt();
 
             services.AddControllersWithViews();
+            services.AddRazorPages();
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -35,12 +53,7 @@ namespace NoSearchEngine.App
 
             services.AddTransient<ISearchService, SearchService>();
             services.AddTransient<IResourceDataAccess, ResourceDataAccess>();
-
-            services.AddDbContext<NoSearchDbContext>(a =>
-                a.UseSqlServer(Configuration.GetConnectionString("SqlConnectionString")));
-
-            services.AddAuthentication()
-                .AddTwitter();
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -62,6 +75,10 @@ namespace NoSearchEngine.App
             app.UseSpaStaticFiles();
 
             app.UseRouting();
+
+            app.UseAuthentication();
+            app.UseIdentityServer();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

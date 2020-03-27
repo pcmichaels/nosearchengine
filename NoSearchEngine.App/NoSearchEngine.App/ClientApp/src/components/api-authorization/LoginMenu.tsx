@@ -43,15 +43,20 @@ export class LoginMenu extends Component<IProps, IState> {
         authService.unsubscribe(this._subscription);
     }
 
-    async populateState() {
-        const [isAuthenticated, user] = await Promise.all([authService.isAuthenticated(), authService.getUser()])
+    async populateState() {        
+        const isAuthenticated = await authService.isAuthenticated();
+        const user = await authService.getUser();
+
+        console.log(isAuthenticated);
+        console.log(user);
+
         this.setState({
             isAuthenticated,
             userName: user && user.name
-        });
+        });                
     }
 
-    render() {
+    render() {       
         const { isAuthenticated, userName } = this.state;
         if (!isAuthenticated) {
             const registerPath = `${ApplicationPaths.Register}`;
@@ -62,6 +67,7 @@ export class LoginMenu extends Component<IProps, IState> {
             const logoutPath : IPath = { pathname: `${ApplicationPaths.LogOut}`, state: { local: true } };
             return this.authenticatedView(userName, profilePath, logoutPath);
         }
+       
     }
 
     authenticatedView(userName: string | null, profilePath: string, logoutPath: IPath) {
@@ -84,6 +90,6 @@ export class LoginMenu extends Component<IProps, IState> {
             <NavItem>
                 <NavLink tag={Link} className="text-dark" to={loginPath}>Login</NavLink>
             </NavItem>
-        </Fragment>);
+        </Fragment>);        
     }
 }
