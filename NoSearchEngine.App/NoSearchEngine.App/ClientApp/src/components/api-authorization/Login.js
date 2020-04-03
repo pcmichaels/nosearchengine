@@ -43,6 +43,8 @@ export class Login extends Component {
     }
 
     render() {
+        debugger;    
+
         const action = this.props.action;
         const { message } = this.state;
 

@@ -22,6 +22,7 @@ export default class ApiAuthorizationRoutes extends Component {
 }
 
 function loginAction(name){
+  debugger; // pcm
     return (<Login action={name}></Login>);
 }
 

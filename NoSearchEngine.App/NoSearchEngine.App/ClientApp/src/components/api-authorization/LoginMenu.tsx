@@ -82,7 +82,8 @@ export class LoginMenu extends Component<IProps, IState> {
 
     }
 
-    anonymousView(registerPath: string, loginPath: string) {
+    anonymousView(registerPath: string, loginPath: string) {        
+
         return (<Fragment>
             <NavItem>
                 <NavLink tag={Link} className="text-dark" to={registerPath}>Register</NavLink>
