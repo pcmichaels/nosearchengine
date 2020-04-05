@@ -38,7 +38,7 @@ namespace NoSearchEngine.App
                 {
                     o.ConsumerKey = Configuration["Authentication:Twitter:ConsumerAPIKey"];
                     o.ConsumerSecret = Configuration["Authentication:Twitter:ConsumerSecret"];
-                    o.RetrieveUserDetails = true;                    
+                    o.RetrieveUserDetails = true;                                        
                 })
                 .AddIdentityServerJwt();
 

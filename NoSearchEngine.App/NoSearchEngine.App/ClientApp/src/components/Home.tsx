@@ -29,7 +29,7 @@ export class Home extends Component<IProps, IState> {
   
   render () {
     return (
-      <div>
+      <div>        
         <Search searchAction={this.runSearch}
           searchTextUpdateAction={this.updateSearchText} />
 
