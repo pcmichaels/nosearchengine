@@ -10,14 +10,14 @@ using NoSearchEngine.Service.Interfaces;
 namespace NoSearchEngine.App.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
-    public class SearchController : ControllerBase
+    [Route("[controller]/[action]")]
+    public class ResourceController : ControllerBase
     {
 
-        private readonly ILogger<SearchController> _logger;
+        private readonly ILogger<ResourceController> _logger;
         private readonly ISearchService _searchService;
 
-        public SearchController(ILogger<SearchController> logger,
+        public ResourceController(ILogger<ResourceController> logger,
             ISearchService searchService)
         {
             _logger = logger;
@@ -29,6 +29,12 @@ namespace NoSearchEngine.App.Controllers
         {
             var results = _searchService.SearchAll(searchText);
             return results;
+        }
+
+        [HttpPost]
+        public IActionResult AddResource([FromBody]Resource resource)
+        {
+            return Ok();
         }
     }
 }

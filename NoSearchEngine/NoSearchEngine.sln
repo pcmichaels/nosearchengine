@@ -12,15 +12,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "adr", "adr", "{800A6917-377
 		0001-2020-01-22-React.md = 0001-2020-01-22-React.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NoSearchEngine.Service", "NoSearchEngine.Service\NoSearchEngine.Service.csproj", "{4D5AC46A-6EF1-452A-90B8-92EAB16B0B9C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NoSearchEngine.Service", "NoSearchEngine.Service\NoSearchEngine.Service.csproj", "{4D5AC46A-6EF1-452A-90B8-92EAB16B0B9C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NoSearchEngine.Models", "NoSearchEngine.Models\NoSearchEngine.Models.csproj", "{1C350E98-5DA8-40CE-964F-7DB63FB1DEC3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NoSearchEngine.Models", "NoSearchEngine.Models\NoSearchEngine.Models.csproj", "{1C350E98-5DA8-40CE-964F-7DB63FB1DEC3}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{1DA411FB-6624-4126-A75E-A06E6C0991EA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NoSearchEngine.UnitTests", "NoSearchEngine.UnitTests\NoSearchEngine.UnitTests.csproj", "{CA50524F-CB45-451D-9727-9E84D9C42E5F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NoSearchEngine.UnitTests", "NoSearchEngine.UnitTests\NoSearchEngine.UnitTests.csproj", "{CA50524F-CB45-451D-9727-9E84D9C42E5F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NoSearchEngine.DataAccess", "NoSearchEngine.DataAccess\NoSearchEngine.DataAccess.csproj", "{04951C37-BEE2-465E-8E82-3DD2EC728BA5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NoSearchEngine.DataAccess", "NoSearchEngine.DataAccess\NoSearchEngine.DataAccess.csproj", "{04951C37-BEE2-465E-8E82-3DD2EC728BA5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NoSearchEngine.Common", "NoSearchEngine.Common\NoSearchEngine.Common.csproj", "{5E303C96-A66A-4FF4-8B39-E78BB240D08F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -48,6 +50,10 @@ Global
 		{04951C37-BEE2-465E-8E82-3DD2EC728BA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{04951C37-BEE2-465E-8E82-3DD2EC728BA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{04951C37-BEE2-465E-8E82-3DD2EC728BA5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E303C96-A66A-4FF4-8B39-E78BB240D08F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E303C96-A66A-4FF4-8B39-E78BB240D08F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E303C96-A66A-4FF4-8B39-E78BB240D08F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E303C96-A66A-4FF4-8B39-E78BB240D08F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

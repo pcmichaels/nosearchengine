@@ -43,7 +43,7 @@ export class Home extends Component<IProps, IState> {
   }
 
   async runSearch(e: React.MouseEvent<HTMLButtonElement>) {
-    const response = await fetch('search/' + this.state.searchText);
+    const response = await fetch('resource/search/' + this.state.searchText);
     const jsondata: IData[] = await response.json();
     this.setState({ searchResults: jsondata, loading: false });
   }

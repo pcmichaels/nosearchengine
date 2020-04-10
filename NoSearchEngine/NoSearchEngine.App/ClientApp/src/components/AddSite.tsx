@@ -3,8 +3,7 @@ import ShortEditTextBox from './Base/ShortEditTextBox';
 import LongEditTextBox from './Base/LongEditTextBox';
 import SimpleButton from './Base/SimpleButton';
 
-interface IProps {
-    addSiteAction: (e: React.MouseEvent<HTMLButtonElement>) => void;
+interface IProps {    
 }
 
 interface IState {
@@ -22,6 +21,9 @@ export class AddSite extends Component<IProps, IState> {
         url: "",
         description: ""
     };
+
+    this.updateUrl = this.updateUrl.bind(this);
+    this.updateDescription = this.updateDescription.bind(this);    
   }
 
   render() {
@@ -29,10 +31,10 @@ export class AddSite extends Component<IProps, IState> {
       <div>
         <h1>Add New Site</h1>
 
-        <ShortEditTextBox label="URL:" editTextUpdateAction={this.updateUrl} />        
-        <LongEditTextBox label="Description:" editTextUpdateAction={this.updateDescription} />        
+        <ShortEditTextBox label="URL:" editTextUpdateAction={this.updateUrl} />
+        <LongEditTextBox label="Description:" editTextUpdateAction={this.updateDescription} />
 
-        <SimpleButton buttonAction={this.props.addSiteAction} buttonLabel="Add" />            
+        <SimpleButton buttonAction={this.addSiteAction.bind(this)} buttonLabel="Add" />
       </div>
     );
   }
@@ -45,4 +47,18 @@ export class AddSite extends Component<IProps, IState> {
     this.setState({description: e.target.value});
   }
 
+  addSiteAction(e: React.MouseEvent<HTMLButtonElement>) {
+    const xhr = new XMLHttpRequest();
+
+    this.setState({ loading: true });
+
+    xhr.open('POST', 'resource/addResource')
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify({ 
+      url: this.state.url,
+      description: this.state.description
+    }));
+
+    this.setState({ loading: false });
+  }
 }
