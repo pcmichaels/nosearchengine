@@ -16,12 +16,14 @@ namespace NoSearchEngine.App.Controllers
 
         private readonly ILogger<ResourceController> _logger;
         private readonly ISearchService _searchService;
+        private readonly IAddResourceService _addResourceService;
 
         public ResourceController(ILogger<ResourceController> logger,
-            ISearchService searchService)
+            ISearchService searchService, IAddResourceService addResourceService)
         {
             _logger = logger;
             _searchService = searchService;
+            _addResourceService = addResourceService;
         }
 
         [HttpGet("{searchText}")]
@@ -32,9 +34,15 @@ namespace NoSearchEngine.App.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddResource([FromBody]Resource resource)
+        public async Task<IActionResult> AddResource([FromBody]Resource resource)
         {
-            return Ok();
+            bool result = await _addResourceService.AddResource(resource);
+
+            if (result)
+            {
+                return Ok();
+            }
+            return BadRequest();
         }
     }
 }

@@ -51,9 +51,10 @@ namespace NoSearchEngine.App
                 configuration.RootPath = "ClientApp/build";
             });
 
-            services.AddTransient<ISearchService, SearchService>();
-            services.AddTransient<IResourceDataAccess, ResourceDataAccess>();
-            
+            services.AddScoped<ISearchService, SearchService>();
+            services.AddScoped<IAddResourceService, AddResourceService>();
+
+            services.AddScoped<IResourceDataAccess, ResourceDataAccess>();            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

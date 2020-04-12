@@ -1,12 +1,13 @@
-﻿using IdentityServer4.Models;
+﻿using NoSearchEngine.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace NoSearchEngine.Service.Interfaces
 {
     public interface IAddResourceService
     {
-        bool AddResource(Resource resource);
+        Task<bool> AddResource(Resource resource);
     }
 }
