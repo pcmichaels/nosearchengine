@@ -28,7 +28,7 @@ namespace NoSearchEngine.DataAccess
         {
             // Search Url first
             var urlResults = _noSearchDbContext.ResourceEntities
-                .Where(a => a.Url == searchText);
+                .Where(a => a.Url.Contains(searchText));
 
             if (urlResults.Any())
             {
@@ -37,14 +37,14 @@ namespace NoSearchEngine.DataAccess
 
             // Search Description if no Url results found
             var descriptionResults = _noSearchDbContext.ResourceEntities
-                .Where(a => a.Description == searchText);
+                .Where(a => a.Description.Contains(searchText));
 
             if (descriptionResults.Any())
             {
                 return descriptionResults;
             }
 
-            return null;
+            return new List<ResourceEntity>();
         }
     }
 }

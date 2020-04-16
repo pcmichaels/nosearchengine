@@ -10,6 +10,7 @@ interface IState {
     loading: boolean;
     url: string;  
     description: string;
+    isBusy: boolean;
   }
   
 export class AddSite extends Component<IProps, IState> {
@@ -19,7 +20,8 @@ export class AddSite extends Component<IProps, IState> {
     this.state = { 
         loading: true,
         url: "",
-        description: ""
+        description: "",
+        isBusy: false
     };
 
     this.updateUrl = this.updateUrl.bind(this);
@@ -34,7 +36,8 @@ export class AddSite extends Component<IProps, IState> {
         <ShortEditTextBox label="URL:" editTextUpdateAction={this.updateUrl} />
         <LongEditTextBox label="Description:" editTextUpdateAction={this.updateDescription} />
 
-        <SimpleButton buttonAction={this.addSiteAction.bind(this)} buttonLabel="Add" />
+        <SimpleButton buttonAction={this.addSiteAction.bind(this)} buttonLabel="Add"
+          isBusy={this.state.isBusy} />
       </div>
     );
   }

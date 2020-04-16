@@ -9,6 +9,7 @@ import { ApplicationPaths } from './components/api-authorization/ApiAuthorizatio
 
 
 import './custom.css'
+import 'bootstrap/dist/css/bootstrap.css'
 
 export default class App extends Component {
   static displayName = App.name;

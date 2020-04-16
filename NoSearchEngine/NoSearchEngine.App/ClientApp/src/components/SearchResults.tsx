@@ -8,7 +8,7 @@ type SearchResultsProps = {
 function SearchResults(props: SearchResultsProps) {
     
     return (
-      <table className='table table-striped' aria-labelledby="tabelLabel">
+      <table className='table table-striped' aria-labelledby="tableLabel">
         <thead>
           <tr>
             <th>Url</th>

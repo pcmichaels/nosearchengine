@@ -27,8 +27,10 @@ namespace NoSearchEngine.UnitTests.Controller
                 {
                     new Resource() { Url = "www.test.com", Description = expectedResult }
                 });
+            var addResourceService = Substitute.For<IAddResourceService>();
             
-            var searchController = new ResourceController(logger, searchService);
+            var searchController = new ResourceController(
+                logger, searchService, addResourceService);
 
             // Act
             var results = searchController.Search(searchText);

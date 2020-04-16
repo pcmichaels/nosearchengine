@@ -8,8 +8,9 @@ interface IProps {
 
 interface IState {
   searchResults: IData[];
-  loading: boolean;
+  isLoading: boolean;
   searchText: string;  
+  isSearching: boolean;
 }
 
 export class Home extends Component<IProps, IState> {
@@ -19,8 +20,9 @@ export class Home extends Component<IProps, IState> {
     super(props);
     this.state = { 
       searchResults: [], 
-      loading: true,
-      searchText: ''
+      isLoading: true,
+      searchText: '',
+      isSearching: false
     };
 
     this.updateSearchText = this.updateSearchText.bind(this);
@@ -31,7 +33,8 @@ export class Home extends Component<IProps, IState> {
     return (
       <div>        
         <Search searchAction={this.runSearch}
-          searchTextUpdateAction={this.updateSearchText} />
+          searchTextUpdateAction={this.updateSearchText}
+          isBusy={this.state.isSearching} />
 
         <SearchResults data={this.state.searchResults} />
       </div>
@@ -43,8 +46,9 @@ export class Home extends Component<IProps, IState> {
   }
 
   async runSearch(e: React.MouseEvent<HTMLButtonElement>) {
+    this.setState({ isSearching: true });
     const response = await fetch('resource/search/' + this.state.searchText);
     const jsondata: IData[] = await response.json();
-    this.setState({ searchResults: jsondata, loading: false });
+    this.setState({ searchResults: jsondata, isLoading: false, isSearching: false });
   }
 }

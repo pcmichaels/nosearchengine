@@ -2,14 +2,25 @@
 
 interface ButtonProps {        
     buttonLabel: string;
-    buttonAction: (e: React.MouseEvent<HTMLButtonElement>) => void;    
+    buttonAction: (e: React.MouseEvent<HTMLButtonElement>) => void; 
+    isBusy: boolean;
 }
 
 function SimpleButton(props: ButtonProps) {
     
     return (
-        <div>
-            <button onClick={props.buttonAction}>{props.buttonLabel}</button>
+        <div>            
+            { props.isBusy &&                    
+                <button className="btn btn-primary" type="button" disabled>
+                <span className="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                    {props.buttonLabel}
+                </button>                    
+            }
+            { !props.isBusy &&
+                <button className="btn btn-primary" type="button" onClick={props.buttonAction}>                
+                    {props.buttonLabel}
+                </button>
+            }            
         </div>
     );
 }
