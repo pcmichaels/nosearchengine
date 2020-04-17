@@ -11,7 +11,7 @@ interface IState {
   isLoading: boolean;
   searchText: string;  
   isSearching: boolean;
-  isSearchCompleted: boolean;
+  isDataAvailable: boolean;
 }
 
 export class Home extends Component<IProps, IState> {
@@ -24,7 +24,7 @@ export class Home extends Component<IProps, IState> {
       isLoading: true,
       searchText: '',
       isSearching: false,
-      isSearchCompleted: false
+      isDataAvailable: false
     };
 
     this.updateSearchText = this.updateSearchText.bind(this);
@@ -38,7 +38,7 @@ export class Home extends Component<IProps, IState> {
           searchTextUpdateAction={this.updateSearchText}
           isBusy={this.state.isSearching} />
 
-        {this.state.isSearchCompleted &&
+        {this.state.isDataAvailable &&
           <SearchResults data={this.state.searchResults} />
         }
       </div>
@@ -53,6 +53,10 @@ export class Home extends Component<IProps, IState> {
     this.setState({ isSearching: true });
     const response = await fetch('resource/search/' + this.state.searchText);
     const jsondata: IData[] = await response.json();
-    this.setState({ searchResults: jsondata, isLoading: false, isSearching: false });
+    if (jsondata.length != 0) {
+      this.setState({ searchResults: jsondata, isLoading: false, isSearching: false, isDataAvailable: true });
+    } else {
+      this.setState({ searchResults: [], isLoading: false, isSearching: false, isDataAvailable: false });
+    }
   }
 }

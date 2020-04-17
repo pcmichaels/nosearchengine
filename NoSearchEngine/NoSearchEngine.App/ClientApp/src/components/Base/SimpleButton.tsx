@@ -12,8 +12,7 @@ function SimpleButton(props: ButtonProps) {
         <div>            
             { props.isBusy &&                    
                 <button className="btn btn-primary btn-block" type="button" disabled>
-                <span className="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
-                    {props.buttonLabel}
+                    <span className="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>                    
                 </button>                    
             }
             { !props.isBusy &&

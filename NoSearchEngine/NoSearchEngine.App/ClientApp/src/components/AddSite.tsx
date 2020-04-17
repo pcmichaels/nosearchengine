@@ -28,6 +28,10 @@ export class AddSite extends Component<IProps, IState> {
     this.updateDescription = this.updateDescription.bind(this);    
   }
 
+  componentDidMount() {
+    this.setState({ loading:false });
+  }
+
   render() {
     return (
       <div>
@@ -66,15 +70,18 @@ export class AddSite extends Component<IProps, IState> {
   addSiteAction(e: React.MouseEvent<HTMLButtonElement>) {
     const xhr = new XMLHttpRequest();
 
-    this.setState({ loading: true });
+    this.setState({ isBusy: true });
 
     xhr.open('POST', 'resource/addResource')
     xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.onload = () => {      
+      window.location.href = '/';      
+    }
     xhr.send(JSON.stringify({ 
       url: this.state.url,
       description: this.state.description
     }));
 
-    this.setState({ loading: false });
+    this.setState({ isBusy: false });
   }
 }
