@@ -8,9 +8,13 @@ interface LongEditTextBoxProps {
 function LongEditTextBox(props: LongEditTextBoxProps) {
     
     return (
-        <div>
-            <label>{props.label}</label>
-            <textarea onChange={props.editTextUpdateAction} rows={5} cols={50} />            
+        <div className="container">
+            <div className="row">            
+                <label htmlFor="longEditText" style={{ fontWeight: "bold" }}>{props.label}</label>
+            </div>
+            <div className="row">            
+                <textarea id="longEditText" onChange={props.editTextUpdateAction} rows={5} cols={50} />            
+            </div>
         </div>
     );
 }

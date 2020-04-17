@@ -31,13 +31,26 @@ export class AddSite extends Component<IProps, IState> {
   render() {
     return (
       <div>
-        <h1>Add New Site</h1>
+        <div className="form-group row">
+          <h2>Add New Site</h2>
+        </div>
 
-        <ShortEditTextBox label="URL:" editTextUpdateAction={this.updateUrl} />
-        <LongEditTextBox label="Description:" editTextUpdateAction={this.updateDescription} />
-
-        <SimpleButton buttonAction={this.addSiteAction.bind(this)} buttonLabel="Add"
-          isBusy={this.state.isBusy} />
+        <div className="form-group row">
+          <table>
+            <tbody>
+              <tr>
+                <ShortEditTextBox label="URL" editTextUpdateAction={this.updateUrl} />        
+              </tr>
+              <tr>
+                <LongEditTextBox label="Description" editTextUpdateAction={this.updateDescription} />
+              </tr>
+              </tbody>
+          </table>
+        </div>
+        <div className="form-group row">
+          <SimpleButton buttonAction={this.addSiteAction.bind(this)} buttonLabel="Add"
+            isBusy={this.state.isBusy} />
+        </div>
       </div>
     );
   }

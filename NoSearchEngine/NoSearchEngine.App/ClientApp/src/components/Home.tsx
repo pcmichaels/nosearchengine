@@ -11,6 +11,7 @@ interface IState {
   isLoading: boolean;
   searchText: string;  
   isSearching: boolean;
+  isSearchCompleted: boolean;
 }
 
 export class Home extends Component<IProps, IState> {
@@ -22,7 +23,8 @@ export class Home extends Component<IProps, IState> {
       searchResults: [], 
       isLoading: true,
       searchText: '',
-      isSearching: false
+      isSearching: false,
+      isSearchCompleted: false
     };
 
     this.updateSearchText = this.updateSearchText.bind(this);
@@ -36,7 +38,9 @@ export class Home extends Component<IProps, IState> {
           searchTextUpdateAction={this.updateSearchText}
           isBusy={this.state.isSearching} />
 
-        <SearchResults data={this.state.searchResults} />
+        {this.state.isSearchCompleted &&
+          <SearchResults data={this.state.searchResults} />
+        }
       </div>
     );
   }

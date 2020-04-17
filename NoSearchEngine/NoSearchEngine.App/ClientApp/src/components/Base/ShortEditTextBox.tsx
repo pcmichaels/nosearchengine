@@ -8,9 +8,14 @@ interface ShortEditTextBoxProps {
 function ShortEditTextBox(props: ShortEditTextBoxProps) {
     
     return (
-        <div>
-            <label>{props.label}</label>
-            <input type='text' onChange={props.editTextUpdateAction} />            
+        <div className="container">
+            <div className="row">            
+                <label htmlFor="editText" style={{ fontWeight: "bold" }}>{props.label}</label>
+            </div>
+            <div className="row">            
+                <input id="editText" type='text' onChange={props.editTextUpdateAction} />            
+            </div>
+            
         </div>
     );
 }
