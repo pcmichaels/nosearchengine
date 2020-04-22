@@ -3,6 +3,7 @@
 interface LongEditTextBoxProps {    
     label: string;
     editTextUpdateAction: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;    
+    text: string;
 }
 
 function LongEditTextBox(props: LongEditTextBoxProps) {
@@ -13,7 +14,7 @@ function LongEditTextBox(props: LongEditTextBoxProps) {
                 <label htmlFor="longEditText" style={{ fontWeight: "bold" }}>{props.label}</label>
             </div>
             <div className="row">            
-                <textarea id="longEditText" onChange={props.editTextUpdateAction} rows={5} cols={50} />            
+                <textarea id="longEditText" value={props.text} onChange={props.editTextUpdateAction} rows={5} cols={50} />            
             </div>
         </div>
     );

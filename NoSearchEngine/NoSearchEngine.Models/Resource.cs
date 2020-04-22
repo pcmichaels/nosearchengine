@@ -1,5 +1,3 @@
-using System;
-
 namespace NoSearchEngine.Models
 {
     public class Resource

@@ -1,7 +1,5 @@
 ﻿using NoSearchEngine.DataAccess.Entities;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace NoSearchEngine.UnitTests.Data
 {

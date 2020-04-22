@@ -3,8 +3,8 @@ using System.Threading.Tasks;
 
 namespace NoSearchEngine.Service.Interfaces
 {
-    public interface IAddResourceService
+    public interface IWebSiteService
     {
-        Task<bool> AddResource(Resource resource);
+        Task<DataResult<SiteMetaData>> GetSiteMetaData(string url);
     }
 }

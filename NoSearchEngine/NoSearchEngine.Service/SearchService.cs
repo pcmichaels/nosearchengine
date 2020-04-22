@@ -1,8 +1,6 @@
 ﻿using NoSearchEngine.DataAccess;
 using NoSearchEngine.Models;
 using NoSearchEngine.Service.Interfaces;
-using System;
-using System.Collections;
 using System.Collections.Generic;
 
 namespace NoSearchEngine.Service

@@ -3,10 +3,8 @@ using NoSearchEngine.App.Controllers;
 using NoSearchEngine.Models;
 using NoSearchEngine.Service.Interfaces;
 using NSubstitute;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Xunit;
 
 namespace NoSearchEngine.UnitTests.Controller
@@ -28,7 +26,7 @@ namespace NoSearchEngine.UnitTests.Controller
                     new Resource() { Url = "www.test.com", Description = expectedResult }
                 });
             var addResourceService = Substitute.For<IAddResourceService>();
-            
+
             var searchController = new ResourceController(
                 logger, searchService, addResourceService);
 

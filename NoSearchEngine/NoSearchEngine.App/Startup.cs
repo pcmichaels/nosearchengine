@@ -9,6 +9,9 @@ using Microsoft.Extensions.Hosting;
 using NoSearchEngine.DataAccess;
 using NoSearchEngine.Service;
 using NoSearchEngine.Service.Interfaces;
+using System.Net.Http;
+using WebSiteMeta.Scraper;
+using WebSiteMeta.Scraper.HttpClientWrapper;
 
 namespace NoSearchEngine.App
 {
@@ -38,7 +41,7 @@ namespace NoSearchEngine.App
                 {
                     o.ConsumerKey = Configuration["Authentication:Twitter:ConsumerAPIKey"];
                     o.ConsumerSecret = Configuration["Authentication:Twitter:ConsumerSecret"];
-                    o.RetrieveUserDetails = true;                                        
+                    o.RetrieveUserDetails = true;
                 })
                 .AddIdentityServerJwt();
 
@@ -53,8 +56,17 @@ namespace NoSearchEngine.App
 
             services.AddScoped<ISearchService, SearchService>();
             services.AddScoped<IAddResourceService, AddResourceService>();
+            services.AddScoped<IWebSiteService, WebSiteService>();
 
-            services.AddScoped<IResourceDataAccess, ResourceDataAccess>();            
+            services.AddScoped<IResourceDataAccess, ResourceDataAccess>();
+
+            services.AddTransient<IFindMetaData, FindMetaData>(a =>
+            {
+                var factory = a.GetService<IHttpClientFactory>();
+                var client = factory.CreateClient();
+                var wrapper = new DefaultHttpClientWrapper(client);
+                return new FindMetaData(wrapper);
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

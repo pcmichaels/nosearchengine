@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace NoSearchEngine.Common
+﻿namespace NoSearchEngine.Common
 {
     public class Class1
     {

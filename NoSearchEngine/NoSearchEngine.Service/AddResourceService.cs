@@ -1,9 +1,6 @@
 ﻿using NoSearchEngine.DataAccess;
 using NoSearchEngine.Models;
 using NoSearchEngine.Service.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace NoSearchEngine.Service
@@ -19,6 +16,9 @@ namespace NoSearchEngine.Service
 
         public async Task<bool> AddResource(Resource resource)
         {
+            // Tidy / Sanitise input
+
+            // Add to DB
             return await _resourceDataAccess.AddResource(resource);
         }
     }

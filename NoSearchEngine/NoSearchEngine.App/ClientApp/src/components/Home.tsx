@@ -32,15 +32,15 @@ export class Home extends Component<IProps, IState> {
   }
   
   render () {
-    return (
-      <div>        
-        <Search searchAction={this.runSearch}
-          searchTextUpdateAction={this.updateSearchText}
-          isBusy={this.state.isSearching} />
+    return (           
+        <div>
+          <Search searchAction={this.runSearch}
+            searchTextUpdateAction={this.updateSearchText}
+            isBusy={this.state.isSearching} />
 
-        {this.state.isDataAvailable &&
-          <SearchResults data={this.state.searchResults} />
-        }
+          {this.state.isDataAvailable &&
+            <SearchResults data={this.state.searchResults} />
+          }        
       </div>
     );
   }
