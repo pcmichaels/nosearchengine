@@ -11,7 +11,7 @@ interface SearchProps {
 function Search(props: SearchProps) {
     
     return (        
-        <div className="form-group row">
+        <div className="form-group row" style={{ width: '100%' }}> 
 
             <label htmlFor="searchText" className="col-sm-2 col-form-label">Search</label>
             <div className="col-sm-8">

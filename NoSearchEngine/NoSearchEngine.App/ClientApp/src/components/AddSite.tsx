@@ -40,12 +40,13 @@ export class AddSite extends Component<IProps, IState> {
   }
 
   componentDidMount() {
-    this.setState({ loading:false });
+    this.setState({ loading: false });
   }
 
   render() {
     return (
-      <div>
+      <div className="centreLayout">
+        <div>
         <div className="form-group row">
           <h2>Add New Site</h2>
         </div>
@@ -68,6 +69,7 @@ export class AddSite extends Component<IProps, IState> {
         <div className="form-group row">
           <SimpleButton buttonAction={this.addSiteAction.bind(this)} buttonLabel="Add"
             isBusy={this.state.isBusy} />
+        </div>
         </div>
       </div>
     );

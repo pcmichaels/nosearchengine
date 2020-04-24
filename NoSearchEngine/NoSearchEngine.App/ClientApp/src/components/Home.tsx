@@ -32,8 +32,8 @@ export class Home extends Component<IProps, IState> {
   }
   
   render () {
-    return (           
-        <div>
+    return (                 
+      <div className="centreLayout">
           <Search searchAction={this.runSearch}
             searchTextUpdateAction={this.updateSearchText}
             isBusy={this.state.isSearching} />

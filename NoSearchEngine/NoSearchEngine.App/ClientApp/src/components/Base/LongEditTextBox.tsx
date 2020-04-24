@@ -11,7 +11,7 @@ function LongEditTextBox(props: LongEditTextBoxProps) {
     return (
         <div className="container">
             <div className="row">            
-                <label htmlFor="longEditText" style={{ fontWeight: "bold" }}>{props.label}</label>
+                <label htmlFor="longEditText" style={{ fontWeight: "bold", marginTop: "10px" }}>{props.label}</label>
             </div>
             <div className="row">            
                 <textarea id="longEditText" value={props.text} onChange={props.editTextUpdateAction} rows={5} cols={50} />            
