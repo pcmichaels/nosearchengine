@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
@@ -33,9 +35,6 @@ namespace NoSearchEngine.App
             services.AddDefaultIdentity<ApplicationUserEntity>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<NoSearchDbContext>();
 
-            services.AddIdentityServer()
-                .AddApiAuthorization<ApplicationUserEntity, NoSearchDbContext>();
-
             services.AddAuthentication()
                 .AddTwitter(o =>
                 {
@@ -44,6 +43,16 @@ namespace NoSearchEngine.App
                     o.RetrieveUserDetails = true;
                 })
                 .AddIdentityServerJwt();
+
+            services.AddAuthorization(o =>
+            {
+                o.DefaultPolicy = new AuthorizationPolicyBuilder()
+                    .RequireAuthenticatedUser()
+                    .Build();
+            });
+
+            services.AddIdentityServer()
+                .AddApiAuthorization<ApplicationUserEntity, NoSearchDbContext>();
 
             services.AddControllersWithViews();
             services.AddRazorPages();

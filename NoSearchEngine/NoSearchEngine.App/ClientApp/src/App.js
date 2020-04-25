@@ -10,6 +10,7 @@ import { ApplicationPaths } from './components/api-authorization/ApiAuthorizatio
 
 import './custom.css'
 import 'bootstrap/dist/css/bootstrap.css'
+import { MySites } from './components/MySites';
 
 export default class App extends Component {
   static displayName = App.name;
@@ -28,6 +29,7 @@ export default class App extends Component {
       <Layout>
         <Route exact path='/' component={Home} />        
         <Route path='/addSite' component={AddSite} />
+        <Route path='/mySites' component={MySites} />
         <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
 
       </Layout>

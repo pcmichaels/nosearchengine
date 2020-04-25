@@ -5,6 +5,6 @@ namespace NoSearchEngine.Service.Interfaces
 {
     public interface IAddResourceService
     {
-        Task<bool> AddResource(Resource resource);
+        Task<bool> AddResource(Resource resource, string Requestor);
     }
 }

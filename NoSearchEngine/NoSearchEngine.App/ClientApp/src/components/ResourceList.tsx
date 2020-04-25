@@ -1,11 +1,11 @@
 import React from 'react';
 import { IData } from './Interfaces/IData';
 
-type SearchResultsProps = {
+type ResourceListProps = {
     data: IData[]
 }
 
-function SearchResults(props: SearchResultsProps) {
+function ResourceList(props: ResourceListProps) {
     
     return (
       <table className='table table-striped' aria-labelledby="tableLabel">
@@ -27,4 +27,4 @@ function SearchResults(props: SearchResultsProps) {
     );
 }
 
-export default SearchResults;
+export default ResourceList;

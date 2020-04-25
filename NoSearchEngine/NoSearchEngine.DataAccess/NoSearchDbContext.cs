@@ -18,6 +18,7 @@ namespace NoSearchEngine.DataAccess
         }
 
         public DbSet<ResourceEntity> ResourceEntities { get; set; }
+        public DbSet<ResourceUserEntity> ResourceUserEntities { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

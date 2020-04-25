@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Search from './Search';
-import SearchResults from './SearchResults';
+import ResourceList from './ResourceList';
 import { IData } from './Interfaces/IData';
 
 interface IProps {
@@ -33,14 +33,24 @@ export class Home extends Component<IProps, IState> {
   
   render () {
     return (                 
-      <div className="centreLayout">
-          <Search searchAction={this.runSearch}
-            searchTextUpdateAction={this.updateSearchText}
-            isBusy={this.state.isSearching} />
+      <div>
+        {this.state.isDataAvailable &&
+          <div>
+            <Search searchAction={this.runSearch}
+              searchTextUpdateAction={this.updateSearchText}
+              isBusy={this.state.isSearching} />
 
-          {this.state.isDataAvailable &&
-            <SearchResults data={this.state.searchResults} />
-          }        
+            <ResourceList data={this.state.searchResults} />
+          </div>
+        }
+
+        {!this.state.isDataAvailable &&
+          <div className="centreLayout">
+              <Search searchAction={this.runSearch}
+                searchTextUpdateAction={this.updateSearchText}
+                isBusy={this.state.isSearching} />
+          </div>
+        }
       </div>
     );
   }

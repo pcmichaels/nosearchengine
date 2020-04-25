@@ -49,9 +49,6 @@ export class NavMenu extends Component<INavMenuProps, IState> {
                 <NavItem>
                   <NavLink tag={Link} className="text-dark" to="/mySites">My Sites</NavLink>
                 </NavItem>
-                <NavItem>
-                  <NavLink tag={Link} className="text-dark" to="/myProfile">My Profile</NavLink>
-                </NavItem>
                 <LoginMenu>
                 </LoginMenu>
 

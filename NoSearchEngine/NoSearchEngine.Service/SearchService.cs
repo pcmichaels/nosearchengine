@@ -14,6 +14,9 @@ namespace NoSearchEngine.Service
             _resourceDataAccess = resourceDataAccess;
         }
 
+        public IEnumerable<Resource> ByUser(string subjectId) =>        
+            _resourceDataAccess.ByUser(subjectId);        
+
         public IEnumerable<Resource> SearchAll(string searchText) =>
             _resourceDataAccess.SearchAll(searchText);
     }

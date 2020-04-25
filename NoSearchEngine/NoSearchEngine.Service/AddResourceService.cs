@@ -14,12 +14,12 @@ namespace NoSearchEngine.Service
             _resourceDataAccess = resourceDataAccess;
         }
 
-        public async Task<bool> AddResource(Resource resource)
+        public async Task<bool> AddResource(Resource resource, string requestor)
         {
             // Tidy / Sanitise input
 
             // Add to DB
-            return await _resourceDataAccess.AddResource(resource);
+            return await _resourceDataAccess.AddResource(resource, requestor);
         }
     }
 }
