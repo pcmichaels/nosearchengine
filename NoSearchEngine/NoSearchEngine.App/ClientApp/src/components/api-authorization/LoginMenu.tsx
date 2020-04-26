@@ -72,10 +72,10 @@ export class LoginMenu extends Component<IProps, IState> {
 
     authenticatedView(userName: string | null, profilePath: string, logoutPath: IPath) {
         return (<Fragment>
-            <NavItem>
+            <NavItem className="custom-nav">
                 <NavLink tag={Link} className="text-dark" to={profilePath}>Hello {userName}</NavLink>
             </NavItem>
-            <NavItem>
+            <NavItem className="custom-nav">
                 <NavLink tag={Link} className="text-dark" to={logoutPath}>Logout</NavLink>
             </NavItem>
         </Fragment>);
@@ -85,10 +85,10 @@ export class LoginMenu extends Component<IProps, IState> {
     anonymousView(registerPath: string, loginPath: string) {        
 
         return (<Fragment>
-            <NavItem>
+            <NavItem className="custom-nav">
                 <NavLink tag={Link} className="text-dark" to={registerPath}>Register</NavLink>
             </NavItem>
-            <NavItem>
+            <NavItem className="custom-nav">
                 <NavLink tag={Link} className="text-dark" to={loginPath}>Login</NavLink>
             </NavItem>
         </Fragment>);        

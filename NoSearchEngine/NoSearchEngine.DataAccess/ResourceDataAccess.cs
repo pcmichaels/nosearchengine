@@ -51,7 +51,8 @@ namespace NoSearchEngine.DataAccess
         {
             // Search Url first
             var urlResults = _noSearchDbContext.ResourceEntities
-                .Where(a => a.Url.Contains(searchText));
+                .Where(a => a.Url.Contains(searchText)
+                && a.IsApproved);
 
             if (urlResults.Any())
             {
@@ -60,7 +61,8 @@ namespace NoSearchEngine.DataAccess
 
             // Search Description if no Url results found
             var descriptionResults = _noSearchDbContext.ResourceEntities
-                .Where(a => a.Description.Contains(searchText));
+                .Where(a => a.Description.Contains(searchText)
+                && a.IsApproved);
 
             if (descriptionResults.Any())
             {
@@ -74,9 +76,10 @@ namespace NoSearchEngine.DataAccess
         {
             var results = _noSearchDbContext.ResourceUserEntities
                 .Where(a => a.User.Id == subjectId)
-                .Include(a => a.Resource).ToList();            
+                .Include(a => a.Resource).ToList()
+                .Select(a => a.Resource);            
 
-            return results.Select(a => a.Resource);
+            return results;
         }
     }
 }

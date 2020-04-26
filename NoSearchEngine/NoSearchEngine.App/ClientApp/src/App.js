@@ -6,6 +6,8 @@ import { AddSite } from './components/AddSite';
 import AuthorizeRoute from './components/api-authorization/AuthorizeRoute';
 import ApiAuthorizationRoutes from './components/api-authorization/ApiAuthorizationRoutes';
 import { ApplicationPaths } from './components/api-authorization/ApiAuthorizationConstants';
+import { AddSiteSuccess } from './components/AddSiteSuccess';
+import { AddSiteFailure } from './components/AddSiteFailure';
 
 
 import './custom.css'
@@ -13,23 +15,16 @@ import 'bootstrap/dist/css/bootstrap.css'
 import { MySites } from './components/MySites';
 
 export default class App extends Component {
-  static displayName = App.name;
-        /*
-        When authentication is working then replace the route with this
-        <AuthorizeRoute path='/mySites' component={MySites} />
-
-        Add these when ready:
-        <Route path='/mySites' component={MySites} />
-        <Route path='/myProfile' component={MyProfile} />
-
-        */
+  static displayName = App.name;        
 
   render () {
     return (
       <Layout>
         <Route exact path='/' component={Home} />        
-        <Route path='/addSite' component={AddSite} />
-        <Route path='/mySites' component={MySites} />
+        <AuthorizeRoute path='/addSite' component={AddSite} />
+        <AuthorizeRoute path='/addSite/Success' component={AddSiteSuccess} />
+        <AuthorizeRoute path='/addSite/Failure' component={AddSiteFailure} />
+        <AuthorizeRoute path='/mySites' component={MySites} />        
         <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
 
       </Layout>

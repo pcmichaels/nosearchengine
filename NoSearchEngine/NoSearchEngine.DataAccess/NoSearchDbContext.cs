@@ -31,6 +31,12 @@ namespace NoSearchEngine.DataAccess
             builder.Entity<IdentityUserLogin<string>>().ToTable("UserLogin");
             builder.Entity<IdentityUserToken<string>>().ToTable("UserToken");
             builder.Entity<IdentityRoleClaim<string>>().ToTable("RoleClaim");
+
+            builder.Entity<ResourceEntity>()
+                .HasIndex(a => new { a.IsApproved, a.Url });
+
+            builder.Entity<ResourceEntity>()
+                .HasIndex(a => new { a.IsApproved, a.Description });
         }
     }
 }

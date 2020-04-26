@@ -16,7 +16,7 @@ function SimpleButton(props: ButtonProps) {
                 </button>                    
             }
             { !props.isBusy &&
-                <button className="btn btn-primary btn-block" type="button" onClick={props.buttonAction}>                
+                <button className="btn btn-primary btn-block custom-btn" type="button" onClick={props.buttonAction}>                
                     {props.buttonLabel}
                 </button>
             }            

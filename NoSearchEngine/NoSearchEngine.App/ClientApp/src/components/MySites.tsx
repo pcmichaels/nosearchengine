@@ -33,7 +33,7 @@ export class MySites extends Component<IProps, IState> {
   
         return (
 
-            <div className="centreLayout">
+            <div>
                 <div className="form-group row">
                     <h2>My Sites</h2>
                 </div>

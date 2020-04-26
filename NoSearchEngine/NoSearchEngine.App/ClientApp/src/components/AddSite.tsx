@@ -120,14 +120,17 @@ export class AddSite extends Component<IProps, IState> {
 
     xhr.open('POST', 'resource/addResource')
     xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.onload = () => {      
-      window.location.href = '/';      
+    xhr.onload = () => {
+      this.setState({ isBusy: false });
+      if (xhr.status === 200) {
+        window.location.href = '/AddSite/Success';
+      } else {
+        window.location.href = '/AddSite/Failure';
+      }      
     }
     xhr.send(JSON.stringify({ 
       url: this.state.url,
       description: this.state.description
-    }));
-
-    this.setState({ isBusy: false });
+    }));    
   }
 }
