@@ -22,8 +22,8 @@ export default class App extends Component {
       <Layout>
         <Route exact path='/' component={Home} />        
         <AuthorizeRoute path='/addSite' component={AddSite} />
-        <AuthorizeRoute path='/addSite/Success' component={AddSiteSuccess} />
-        <AuthorizeRoute path='/addSite/Failure' component={AddSiteFailure} />
+        <AuthorizeRoute path='/addSiteSuccess' component={AddSiteSuccess} />
+        <AuthorizeRoute path='/addSiteFailure' component={AddSiteFailure} />
         <AuthorizeRoute path='/mySites' component={MySites} />        
         <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
 

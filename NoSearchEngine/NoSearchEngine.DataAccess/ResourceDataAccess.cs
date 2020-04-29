@@ -20,6 +20,9 @@ namespace NoSearchEngine.DataAccess
 
         public async Task<bool> AddResource(Resource resource, string requestor)
         {
+            var result = ByUrl(resource.Url);
+            if (result != null) return false;
+
             var resourceEntity = ResourceEntity.FromModel(resource);
 
             _noSearchDbContext.ResourceEntities.Add(resourceEntity);
@@ -29,6 +32,9 @@ namespace NoSearchEngine.DataAccess
             return (saveChangesResult != 0);
         }
 
+        public Resource ByUrl(string url) =>        
+            _noSearchDbContext.ResourceEntities.FirstOrDefault(a => a.Url == url);
+        
         private bool AddResourceToUser(ResourceEntity resource, string subjectId)
         {
             bool exists = _noSearchDbContext.ResourceUserEntities

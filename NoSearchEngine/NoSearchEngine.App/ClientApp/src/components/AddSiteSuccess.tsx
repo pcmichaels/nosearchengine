@@ -19,9 +19,10 @@ export class AddSiteSuccess extends Component<IProps, IState> {
     render() {
         return (
 
-            <div>
+            <div className="centreLayout">
                 <div className="form-group row">
                     <h2>Site successfully added</h2>
+                    <br />
                     <h3>The site will appear in searches once it has been approved</h3>
                 </div>
 

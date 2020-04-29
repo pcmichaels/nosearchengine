@@ -123,9 +123,9 @@ export class AddSite extends Component<IProps, IState> {
     xhr.onload = () => {
       this.setState({ isBusy: false });
       if (xhr.status === 200) {
-        window.location.href = '/AddSite/Success';
+        window.location.href = '/AddSiteSuccess';
       } else {
-        window.location.href = '/AddSite/Failure';
+        window.location.href = '/AddSiteFailure';
       }      
     }
     xhr.send(JSON.stringify({ 

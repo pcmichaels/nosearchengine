@@ -10,5 +10,6 @@ namespace NoSearchEngine.DataAccess
         IEnumerable<ResourceEntity> SearchAll(string searchText);
         Task<bool> AddResource(Resource resource, string requestor);
         IEnumerable<Resource> ByUser(string subjectId);
+        Resource ByUrl(string url);
     }
 }
