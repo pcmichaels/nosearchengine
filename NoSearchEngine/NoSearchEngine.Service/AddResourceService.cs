@@ -18,11 +18,14 @@ namespace NoSearchEngine.Service
             _findMetaData = findMetaData;
         }
 
-        public async Task<bool> AddResource(Resource resource, string requestor)
+        public async Task<DataResult<Resource>> AddResource(Resource resource, string requestor)
         {
             // Tidy / Sanitise input
             resource.Url = _findMetaData.CleanUrl(resource.Url);
-            if (!_findMetaData.ValidateUrl(resource.Url)) return false;
+            if (!_findMetaData.ValidateUrl(resource.Url))
+            {
+                return DataResult<Resource>.Error("Invalid Url");
+            }
 
             // Add to DB
             return await _resourceDataAccess.AddResource(resource, requestor);

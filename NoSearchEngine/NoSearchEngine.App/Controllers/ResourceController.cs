@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using IdentityServer4.Extensions;
 using Microsoft.AspNetCore.Authorization;
+using System.Linq;
 
 namespace NoSearchEngine.App.Controllers
 {
@@ -45,13 +46,13 @@ namespace NoSearchEngine.App.Controllers
         public async Task<IActionResult> AddResource([FromBody]Resource resource)
         {
             string subjectId = User.Identity.GetSubjectId();
-            bool result = await _addResourceService.AddResource(resource, subjectId);
+            var result = await _addResourceService.AddResource(resource, subjectId);
 
-            if (result)
+            if (result.IsSuccess)
             {
                 return Ok();
             }
-            return BadRequest();
+            return BadRequest(result.Errors.FirstOrDefault() ?? "Unknown");
         }
     }
 }

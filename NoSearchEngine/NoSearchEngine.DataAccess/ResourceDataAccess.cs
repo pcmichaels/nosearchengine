@@ -18,18 +18,31 @@ namespace NoSearchEngine.DataAccess
             _noSearchDbContext = noSearchDbContext;
         }
 
-        public async Task<bool> AddResource(Resource resource, string requestor)
+        public async Task<DataResult<Resource>> AddResource(Resource resource, string requestor)
         {
             var result = ByUrl(resource.Url);
-            if (result != null) return false;
+            if (result != null)
+            {
+                return DataResult<Resource>.Error(result, "Site already exists");
+            }
 
             var resourceEntity = ResourceEntity.FromModel(resource);
 
             _noSearchDbContext.ResourceEntities.Add(resourceEntity);
-            if (!AddResourceToUser(resourceEntity, requestor)) return false;
+            if (!AddResourceToUser(resourceEntity, requestor))
+            {
+                return DataResult<Resource>.Error("Error adding the resource");
+            }
 
             int saveChangesResult = await _noSearchDbContext.SaveChangesAsync();
-            return (saveChangesResult != 0);
+            if (saveChangesResult == 0)
+            {
+                return DataResult<Resource>.Error("No changes made");
+            }
+            else
+            {
+                return DataResult<Resource>.Success(resourceEntity);
+            }
         }
 
         public Resource ByUrl(string url) =>        

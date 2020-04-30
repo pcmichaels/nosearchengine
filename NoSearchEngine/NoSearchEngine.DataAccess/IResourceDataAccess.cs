@@ -8,7 +8,7 @@ namespace NoSearchEngine.DataAccess
     public interface IResourceDataAccess
     {
         IEnumerable<ResourceEntity> SearchAll(string searchText);
-        Task<bool> AddResource(Resource resource, string requestor);
+        Task<DataResult<Resource>> AddResource(Resource resource, string requestor);
         IEnumerable<Resource> ByUser(string subjectId);
         Resource ByUrl(string url);
     }

@@ -24,5 +24,20 @@ namespace NoSearchEngine.Models
                 Errors = errors                
             };
 
+        public static DataResult<T> Error(string error) =>
+            new DataResult<T>()
+            {
+                IsSuccess = false,
+                Errors = new[] { error }
+            };
+
+        public static DataResult<T> Error(T data, string error) =>
+            new DataResult<T>()
+            {
+                IsSuccess = false,
+                Errors = new[] { error },
+                Data = data
+            };
+
     }
 }

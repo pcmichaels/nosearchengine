@@ -125,7 +125,7 @@ export class AddSite extends Component<IProps, IState> {
       if (xhr.status === 200) {
         window.location.href = '/AddSiteSuccess';
       } else {
-        window.location.href = '/AddSiteFailure';
+        window.location.href = '/AddSiteFailure/' + xhr.response;
       }      
     }
     xhr.send(JSON.stringify({ 
