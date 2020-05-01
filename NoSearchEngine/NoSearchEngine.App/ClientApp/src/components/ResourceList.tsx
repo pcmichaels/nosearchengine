@@ -18,7 +18,7 @@ function ResourceList(props: ResourceListProps) {
         <tbody>
           {props.data.map(result =>
             <tr key={result.url}>
-              <td><a href={result.url}>{result.url}</a></td>
+              <td><a href={result.url} target="_blank">{result.url}</a></td>
               <td>{result.description}</td>
             </tr>
           )}
