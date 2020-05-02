@@ -45,9 +45,19 @@ namespace NoSearchEngine.DataAccess
             }
         }
 
-        public Resource ByUrl(string url) =>        
-            _noSearchDbContext.ResourceEntities.FirstOrDefault(a => a.Url == url);
-        
+        public Resource ByUrl(string url)
+        {
+            string urlBase = Common.Helpers.UrlHelper.GetUrlBase(url);
+            
+            var matches = _noSearchDbContext.ResourceEntities.Where(a =>
+                a.Url.Contains(urlBase));
+
+            var match = matches.AsEnumerable().FirstOrDefault(a =>
+                Common.Helpers.UrlHelper.GetUrlBase(a.Url) == urlBase);
+
+            return match;
+        }
+
         private bool AddResourceToUser(ResourceEntity resource, string subjectId)
         {
             bool exists = _noSearchDbContext.ResourceUserEntities

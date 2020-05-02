@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\NoSearchEngine.App\NoSearchEngine.App.csproj" />
+    <ProjectReference Include="..\NoSearchEngine.Common\NoSearchEngine.Common.csproj" />
     <ProjectReference Include="..\NoSearchEngine.Service\NoSearchEngine.Service.csproj" />
   </ItemGroup>
 

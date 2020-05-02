@@ -23,6 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\NoSearchEngine.Common\NoSearchEngine.Common.csproj" />
     <ProjectReference Include="..\NoSearchEngine.Models\NoSearchEngine.Models.csproj" />
   </ItemGroup>
 
