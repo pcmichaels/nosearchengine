@@ -49,7 +49,7 @@ export class MySites extends Component<IProps, IState> {
         this.setState({ isLoading: true });
         const response = await fetch('resource/mySites');
         const jsondata: IData[] = await response.json();
-        if (jsondata.length != 0) {
+        if (jsondata.length !== 0) {
           this.setState({ resources: jsondata, isLoading: false, isDataAvailable: true });
         } else {
           this.setState({ resources: [], isLoading: false, isDataAvailable: false });

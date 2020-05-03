@@ -8,7 +8,7 @@ import ApiAuthorizationRoutes from './components/api-authorization/ApiAuthorizat
 import { ApplicationPaths } from './components/api-authorization/ApiAuthorizationConstants';
 import { AddSiteSuccess } from './components/AddSiteSuccess';
 import { AddSiteFailure } from './components/AddSiteFailure';
-
+import { Approval } from './components/Approval';
 
 import './custom.css'
 import 'bootstrap/dist/css/bootstrap.css'
@@ -25,6 +25,7 @@ export default class App extends Component {
         <AuthorizeRoute path='/addSiteSuccess' component={AddSiteSuccess} />
         <AuthorizeRoute path='/addSiteFailure/:reason' component={AddSiteFailure} />
         <AuthorizeRoute path='/mySites' component={MySites} />        
+        <AuthorizeRoute path='/approval' component={Approval} />        
         <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
 
       </Layout>

@@ -18,13 +18,18 @@ namespace NoSearchEngine.App.Controllers
         private readonly ILogger<ResourceController> _logger;
         private readonly ISearchService _searchService;
         private readonly IAddResourceService _addResourceService;
+        private readonly IApprovalService _approvalService;
+        private readonly IUserService _userService;
 
         public ResourceController(ILogger<ResourceController> logger,
-            ISearchService searchService, IAddResourceService addResourceService)
+            ISearchService searchService, IAddResourceService addResourceService,
+            IApprovalService approvalService, IUserService userService)
         {
             _logger = logger;
             _searchService = searchService;
             _addResourceService = addResourceService;
+            _approvalService = approvalService;
+            _userService = userService;
         }
 
         [HttpGet("{searchText}")]
@@ -42,15 +47,19 @@ namespace NoSearchEngine.App.Controllers
             return results;
         }
 
+        [HttpGet()]
+        public IEnumerable<Resource> ApprovalList() =>        
+            _approvalService.GetApprovalSiteList();        
+
         [HttpPost]
         public async Task<IActionResult> AddResource([FromBody]Resource resource)
         {
-            string subjectId = User.Identity.GetSubjectId();
+            string subjectId = _userService.GetSubjectId(User);
             var result = await _addResourceService.AddResource(resource, subjectId);
 
             if (result.IsSuccess)
             {
-                return Ok();
+                return Ok(result.Data);
             }
             return BadRequest(result.Errors.FirstOrDefault() ?? "Unknown");
         }

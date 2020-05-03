@@ -66,10 +66,12 @@ namespace NoSearchEngine.App
             services.AddScoped<ISearchService, SearchService>();
             services.AddScoped<IAddResourceService, AddResourceService>();
             services.AddScoped<IWebSiteService, WebSiteService>();
+            services.AddScoped<IApprovalService, ApprovalService>();
+            services.AddScoped<IUserService, UserService>();
 
             services.AddScoped<IResourceDataAccess, ResourceDataAccess>();
 
-            services.AddTransient<IFindMetaData, FindMetaData>(a =>
+            services.AddScoped<IFindMetaData, FindMetaData>(a =>
             {
                 var factory = a.GetService<IHttpClientFactory>();
                 var client = factory.CreateClient();

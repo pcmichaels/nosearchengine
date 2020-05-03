@@ -2,7 +2,8 @@ import React from 'react';
 import { IData } from './Interfaces/IData';
 
 type ResourceListProps = {
-    data: IData[]
+    data: IData[]    
+
 }
 
 function ResourceList(props: ResourceListProps) {

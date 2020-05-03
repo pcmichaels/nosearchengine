@@ -3,6 +3,7 @@ import ShortEditTextBox from './Base/ShortEditTextBox';
 import LongEditTextBox from './Base/LongEditTextBox';
 import SimpleButton from './Base/SimpleButton';
 import debounce from 'lodash.debounce';
+import { IData } from './Interfaces/IData';
 
 interface IProps {    
 }
@@ -13,11 +14,6 @@ interface IState {
     url: string;  
     description: string;
     isBusy: boolean;
-  }
-
-interface IData {
-    title: string,
-    description: string
 }
   
 export class AddSite extends Component<IProps, IState> {

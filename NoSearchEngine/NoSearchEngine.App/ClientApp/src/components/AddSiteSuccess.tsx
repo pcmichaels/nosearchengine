@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import ResourceList from './ResourceList';
-import { IData } from './Interfaces/IData';
 
 interface IProps {    
 }

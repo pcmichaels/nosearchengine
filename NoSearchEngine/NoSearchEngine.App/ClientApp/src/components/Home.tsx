@@ -10,7 +10,7 @@ interface IState {
   searchResults: IData[];
   isLoading: boolean;
   searchText: string;  
-  isSearching: boolean;
+  isBusy: boolean;
   isDataAvailable: boolean;
 }
 
@@ -23,7 +23,7 @@ export class Home extends Component<IProps, IState> {
       searchResults: [], 
       isLoading: true,
       searchText: '',
-      isSearching: false,
+      isBusy: false,
       isDataAvailable: false
     };
 
@@ -38,7 +38,7 @@ export class Home extends Component<IProps, IState> {
           <div>
             <Search searchAction={this.runSearch}
               searchTextUpdateAction={this.updateSearchText}
-              isBusy={this.state.isSearching} />
+              isBusy={this.state.isBusy} />
 
             <ResourceList data={this.state.searchResults} />
           </div>
@@ -48,7 +48,7 @@ export class Home extends Component<IProps, IState> {
           <div className="centreLayout">
               <Search searchAction={this.runSearch}
                 searchTextUpdateAction={this.updateSearchText}
-                isBusy={this.state.isSearching} />
+                isBusy={this.state.isBusy} />
           </div>
         }
       </div>
@@ -60,13 +60,13 @@ export class Home extends Component<IProps, IState> {
   }
 
   async runSearch(e: React.MouseEvent<HTMLButtonElement>) {
-    this.setState({ isSearching: true });
+    this.setState({ isBusy: true });
     const response = await fetch('resource/search/' + this.state.searchText);
     const jsondata: IData[] = await response.json();
-    if (jsondata.length != 0) {
-      this.setState({ searchResults: jsondata, isLoading: false, isSearching: false, isDataAvailable: true });
+    if (jsondata.length !== 0) {
+      this.setState({ searchResults: jsondata, isLoading: false, isBusy: false, isDataAvailable: true });
     } else {
-      this.setState({ searchResults: [], isLoading: false, isSearching: false, isDataAvailable: false });
+      this.setState({ searchResults: [], isLoading: false, isBusy: false, isDataAvailable: false });
     }
   }
 }

@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
-import ResourceList from './ResourceList';
-import { IData } from './Interfaces/IData';
 import { RouteComponentProps } from 'react-router';
 
-interface IProps extends RouteComponentProps<MatchParams> {    
+interface IProps extends RouteComponentProps<IMatchParams> {    
 
 }
 
-interface MatchParams {
+interface IMatchParams {
     reason: string
 }
 
@@ -31,9 +29,6 @@ export class AddSiteFailure extends Component<IProps, IState> {
                 <div className="row">
                     <h3>{this.props.match.params.reason}</h3>
                 </div>                    
-                <div className="row">
-                    <h3>Please try again later</h3>
-                </div>                
 
                 <div className="row">
                     <a href="/MySites">Go to My Sites</a>

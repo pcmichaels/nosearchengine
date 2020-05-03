@@ -18,7 +18,9 @@ namespace NoSearchEngine.UnitTests.Controller
             string searchText = "should exist";
             string expectedResult = "this test should exist";
 
-            var logger = Substitute.For<ILogger<ResourceController>>();
+            var logger = Substitute.For<ILogger<ResourceController>>();            
+            var approvalService = Substitute.For<IApprovalService>();
+            var userService = Substitute.For<IUserService>();
             var searchService = Substitute.For<ISearchService>();
             searchService.SearchAll(searchText)
                 .Returns(new List<Resource>()
@@ -28,7 +30,8 @@ namespace NoSearchEngine.UnitTests.Controller
             var addResourceService = Substitute.For<IAddResourceService>();
 
             var searchController = new ResourceController(
-                logger, searchService, addResourceService);
+                logger, searchService, addResourceService, 
+                approvalService, userService);
 
             // Act
             var results = searchController.Search(searchText);

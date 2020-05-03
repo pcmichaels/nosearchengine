@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authentication.OAuth.Claims;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using NoSearchEngine.DataAccess.Entities;
 using NoSearchEngine.Models;
@@ -107,6 +108,14 @@ namespace NoSearchEngine.DataAccess
                 .Where(a => a.User.Id == subjectId)
                 .Include(a => a.Resource).ToList()
                 .Select(a => a.Resource);            
+
+            return results;
+        }
+
+        public IEnumerable<Resource> ByApproval(bool isApprovedFilter)
+        {
+            var results = _noSearchDbContext.ResourceEntities
+                .Where(a => a.IsApproved == isApprovedFilter);
 
             return results;
         }
