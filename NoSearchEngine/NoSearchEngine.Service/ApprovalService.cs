@@ -4,6 +4,7 @@ using NoSearchEngine.Service.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace NoSearchEngine.Service
 {
@@ -14,6 +15,12 @@ namespace NoSearchEngine.Service
         public ApprovalService(IResourceDataAccess resourceDataAccess)
         {
             _resourceDataAccess = resourceDataAccess;
+        }
+
+        public async Task<DataResult<Resource>> ApproveResource(string id)
+        {
+            var result = await _resourceDataAccess.ApproveById(id);
+            return result;
         }
 
         public IEnumerable<Resource> GetApprovalSiteList() =>        

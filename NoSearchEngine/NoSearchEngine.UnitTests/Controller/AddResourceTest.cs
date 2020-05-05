@@ -4,10 +4,7 @@ using NoSearchEngine.App.Controllers;
 using NoSearchEngine.Models;
 using NoSearchEngine.Service.Interfaces;
 using NSubstitute;
-using System;
-using System.Collections.Generic;
 using System.Security.Principal;
-using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 

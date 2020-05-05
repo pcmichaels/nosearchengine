@@ -9,12 +9,13 @@ namespace NoSearchEngine.DataAccess.Entities
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public string Id { get; set; }
+        public override string Id { get; set; }
 
         public static ResourceEntity FromModel(Resource resource) =>
             new ResourceEntity()
             {
-                Url = resource.Url,
+                Id = resource.Id,
+                Url = resource.Url,                
                 Description = resource.Description
             };
     }

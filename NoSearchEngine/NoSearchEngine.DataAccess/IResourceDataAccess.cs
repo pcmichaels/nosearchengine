@@ -12,5 +12,7 @@ namespace NoSearchEngine.DataAccess
         IEnumerable<Resource> ByUser(string subjectId);
         Resource ByUrl(string url);
         IEnumerable<Resource> ByApproval(bool isApprovedFilter);
+        Resource ById(string id);
+        Task<DataResult<Resource>> ApproveById(string id);
     }
 }

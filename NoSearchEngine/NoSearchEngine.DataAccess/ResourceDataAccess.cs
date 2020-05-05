@@ -119,5 +119,22 @@ namespace NoSearchEngine.DataAccess
 
             return results;
         }
+
+        public Resource ById(string id)
+        {
+            var resource = _noSearchDbContext.ResourceEntities.Find(id);
+            return resource;
+        }
+
+        public async Task<DataResult<Resource>> ApproveById(string id)
+        {
+            var resource = _noSearchDbContext.ResourceEntities.Find(id);
+            resource.IsApproved = true;
+            if ((await _noSearchDbContext.SaveChangesAsync()) != 0)
+            {
+                return DataResult<Resource>.Success(resource);
+            }
+            return DataResult<Resource>.Error("Unable to save changes");
+        }
     }
 }

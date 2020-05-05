@@ -48,8 +48,20 @@ namespace NoSearchEngine.App.Controllers
         }
 
         [HttpGet()]
-        public IEnumerable<Resource> ApprovalList() =>        
-            _approvalService.GetApprovalSiteList();        
+        public IEnumerable<Resource> ApprovalList() =>
+            _approvalService.GetApprovalSiteList();
+
+        [HttpPost("{id}")]
+        public async Task<IActionResult> ApproveResource(string id)
+        {
+            string subjectId = _userService.GetSubjectId(User);
+            var result = await _approvalService.ApproveResource(id);
+            if (result.IsSuccess)
+            {
+                return Ok(result.Data);
+            }
+            return BadRequest(result.Errors.FirstOrDefault() ?? "Unknown");
+        }
 
         [HttpPost]
         public async Task<IActionResult> AddResource([FromBody]Resource resource)

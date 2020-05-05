@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { IData } from './Interfaces/IData';
+import { IAction } from './Interfaces/IAction';
 import ResourceList from './ResourceList';
 
 interface IProps {    
@@ -22,6 +23,8 @@ export class Approval extends Component<IProps, IState> {
             isDataAvailable: false,
             approvalList: [], 
         };
+
+        this.approve = this.approve.bind(this);
     }
 
     componentDidMount() {
@@ -44,10 +47,36 @@ export class Approval extends Component<IProps, IState> {
         this.setState({ isBusy: true });
         const response = await fetch('resource/approvalList/');
         const jsondata: IData[] = await response.json();
+
+        const approveAction: IAction = {
+            action: this.approve,
+            actionLabel: 'Approve'
+        };
+
+        const deleteAction: IAction = {
+            action: this.delete,
+            actionLabel: 'Delete'
+        };
+
         if (jsondata.length !== 0) {
-          this.setState({ approvalList: jsondata, isLoading: false, isBusy: false, isDataAvailable: true });
+            for (var d of jsondata) {
+                d.actions = [approveAction, deleteAction];
+            }            
+            this.setState({ approvalList: jsondata, isLoading: false, isBusy: false, isDataAvailable: true });
         } else {
-          this.setState({ approvalList: [], isLoading: false, isBusy: false, isDataAvailable: false });
+            this.setState({ approvalList: [], isLoading: false, isBusy: false, isDataAvailable: false });
         }
-      }
+    }
+
+    async approve(id: string) {
+        this.setState({ isBusy: true });
+        const response = await fetch('resource/approveResource/' + id, {
+            method: 'POST'
+        });
+        window.location.reload();
+    }
+
+    delete = () => {
+
+    }
 }

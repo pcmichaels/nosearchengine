@@ -1,8 +1,9 @@
 import React from 'react';
 import { IData } from './Interfaces/IData';
+import SimpleButton from './Base/SimpleButton';
 
 type ResourceListProps = {
-    data: IData[]    
+    data: IData[]
 
 }
 
@@ -21,6 +22,11 @@ function ResourceList(props: ResourceListProps) {
             <tr key={result.url}>
               <td><a href={result.url} target="_blank">{result.url}</a></td>
               <td>{result.description}</td>
+              {result.actions && result.actions.map(action =>
+                <td>
+                  <SimpleButton buttonLabel={action.actionLabel} buttonAction={() => action.action(result.id)} isBusy={false}></SimpleButton>
+                </td>
+              )}
             </tr>
           )}
         </tbody>
