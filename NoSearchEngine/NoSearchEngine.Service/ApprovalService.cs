@@ -17,7 +17,7 @@ namespace NoSearchEngine.Service
             _resourceDataAccess = resourceDataAccess;
         }
 
-        public async Task<DataResult<Resource>> ApproveResource(string id)
+        public async Task<DataResult<Resource>> ApproveResource(string id, string subjectId)
         {
             var result = await _resourceDataAccess.ApproveById(id);
             return result;

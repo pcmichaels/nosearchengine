@@ -32,7 +32,7 @@ namespace NoSearchEngine.UnitTests.Controller
             var userService = Substitute.For<IUserService>();
             userService.GetSubjectId(Arg.Any<IPrincipal>()).Returns("1");
 
-            var addResourceService = Substitute.For<IAddResourceService>();
+            var addResourceService = Substitute.For<IResourceService>();
             addResourceService.AddResource(resourceToAdd, "1").Returns(
                 new DataResult<Resource>()
                 {

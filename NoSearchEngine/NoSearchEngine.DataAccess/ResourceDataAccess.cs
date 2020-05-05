@@ -136,5 +136,36 @@ namespace NoSearchEngine.DataAccess
             }
             return DataResult<Resource>.Error("Unable to save changes");
         }
+
+        public async Task<DataResult<Resource>> DeleteById(string id)
+        {
+            var resource = _noSearchDbContext.ResourceEntities.Find(id);
+            if (resource.IsApproved)
+            {
+                return DataResult<Resource>.Error(resource, "Can not remove an approved resource");
+            }
+
+            var resourceUsers = _noSearchDbContext.ResourceUserEntities
+                .Where(a => a.Resource.Id == id);
+            if (resourceUsers.Any())
+            {
+                _noSearchDbContext.ResourceUserEntities
+                    .RemoveRange(resourceUsers);
+            }
+
+            var result = _noSearchDbContext.Remove(resource);
+            if (result.State != EntityState.Deleted)
+            {
+                return DataResult<Resource>.Error(resource, "Unable to delete resource");
+            }
+
+            int changeCount = await _noSearchDbContext.SaveChangesAsync();
+            if (changeCount == 0)
+            {
+                return DataResult<Resource>.Error(resource, "Unable to save changes");
+            }
+
+            return DataResult<Resource>.Success();
+        }
     }
 }

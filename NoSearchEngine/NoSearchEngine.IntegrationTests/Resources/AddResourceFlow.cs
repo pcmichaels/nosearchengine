@@ -69,7 +69,7 @@ namespace NoSearchEngine.IntegrationTests.Resources
             findMetaData.ValidateUrl(urlTest).Returns(true);
             findMetaData.CleanUrl(urlTest).Returns(urlTest);
 
-            var addResourceService = new AddResourceService(_resourceDataAccess, findMetaData);
+            var addResourceService = new ResourceService(_resourceDataAccess, findMetaData);
             var controller = new ResourceController(
                 logger, searchService, addResourceService,
                 _approvalService, userService);

@@ -17,17 +17,17 @@ namespace NoSearchEngine.App.Controllers
     {
         private readonly ILogger<ResourceController> _logger;
         private readonly ISearchService _searchService;
-        private readonly IAddResourceService _addResourceService;
+        private readonly IResourceService _resourceService;
         private readonly IApprovalService _approvalService;
         private readonly IUserService _userService;
 
         public ResourceController(ILogger<ResourceController> logger,
-            ISearchService searchService, IAddResourceService addResourceService,
+            ISearchService searchService, IResourceService addResourceService,
             IApprovalService approvalService, IUserService userService)
         {
             _logger = logger;
             _searchService = searchService;
-            _addResourceService = addResourceService;
+            _resourceService = addResourceService;
             _approvalService = approvalService;
             _userService = userService;
         }
@@ -55,7 +55,19 @@ namespace NoSearchEngine.App.Controllers
         public async Task<IActionResult> ApproveResource(string id)
         {
             string subjectId = _userService.GetSubjectId(User);
-            var result = await _approvalService.ApproveResource(id);
+            var result = await _approvalService.ApproveResource(id, subjectId);
+            if (result.IsSuccess)
+            {
+                return Ok(result.Data);
+            }
+            return BadRequest(result.Errors.FirstOrDefault() ?? "Unknown");
+        }
+
+        [HttpPost("{id}")]
+        public async Task<IActionResult> DeleteResource(string id)
+        {
+            string subjectId = _userService.GetSubjectId(User);
+            var result = await _resourceService.DeleteResource(id, subjectId);
             if (result.IsSuccess)
             {
                 return Ok(result.Data);
@@ -67,7 +79,7 @@ namespace NoSearchEngine.App.Controllers
         public async Task<IActionResult> AddResource([FromBody]Resource resource)
         {
             string subjectId = _userService.GetSubjectId(User);
-            var result = await _addResourceService.AddResource(resource, subjectId);
+            var result = await _resourceService.AddResource(resource, subjectId);
 
             if (result.IsSuccess)
             {

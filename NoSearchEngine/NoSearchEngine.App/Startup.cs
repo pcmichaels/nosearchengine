@@ -64,7 +64,7 @@ namespace NoSearchEngine.App
             });
 
             services.AddScoped<ISearchService, SearchService>();
-            services.AddScoped<IAddResourceService, AddResourceService>();
+            services.AddScoped<IResourceService, ResourceService>();
             services.AddScoped<IWebSiteService, WebSiteService>();
             services.AddScoped<IApprovalService, ApprovalService>();
             services.AddScoped<IUserService, UserService>();

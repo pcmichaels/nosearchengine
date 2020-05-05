@@ -10,11 +10,17 @@ namespace NoSearchEngine.Models
         public string[] Errors { get; set; }
         public T Data { get; set; }
 
-        public static DataResult<T> Success(T data) =>        
+        public static DataResult<T> Success(T data) =>
             new DataResult<T>()
             {
                 IsSuccess = true,
                 Data = data
+            };
+
+        public static DataResult<T> Success() =>
+            new DataResult<T>()
+            {
+                IsSuccess = true
             };
 
         public static DataResult<T> Error(string[] errors) =>

@@ -14,5 +14,6 @@ namespace NoSearchEngine.DataAccess
         IEnumerable<Resource> ByApproval(bool isApprovedFilter);
         Resource ById(string id);
         Task<DataResult<Resource>> ApproveById(string id);
+        Task<DataResult<Resource>> DeleteById(string id);
     }
 }

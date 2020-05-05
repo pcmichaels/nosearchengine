@@ -6,12 +6,12 @@ using WebSiteMeta.Scraper;
 
 namespace NoSearchEngine.Service
 {
-    public class AddResourceService : IAddResourceService
+    public class ResourceService : IResourceService
     {
         private readonly IResourceDataAccess _resourceDataAccess;
         private readonly IFindMetaData _findMetaData;
 
-        public AddResourceService(IResourceDataAccess resourceDataAccess,
+        public ResourceService(IResourceDataAccess resourceDataAccess,
             IFindMetaData findMetaData)
         {
             _resourceDataAccess = resourceDataAccess;
@@ -29,6 +29,11 @@ namespace NoSearchEngine.Service
 
             // Add to DB
             return await _resourceDataAccess.AddResource(resource, requestor);
+        }
+
+        public async Task<DataResult<Resource>> DeleteResource(string id, string requestor)
+        {
+            return await _resourceDataAccess.DeleteById(id);
         }
     }
 }

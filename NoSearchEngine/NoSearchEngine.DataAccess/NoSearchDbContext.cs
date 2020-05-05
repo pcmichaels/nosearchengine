@@ -37,6 +37,7 @@ namespace NoSearchEngine.DataAccess
 
             builder.Entity<ResourceEntity>()
                 .HasIndex(a => new { a.IsApproved, a.Description });
+
         }
     }
 }

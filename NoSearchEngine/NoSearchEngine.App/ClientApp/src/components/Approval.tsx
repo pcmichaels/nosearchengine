@@ -25,6 +25,7 @@ export class Approval extends Component<IProps, IState> {
         };
 
         this.approve = this.approve.bind(this);
+        this.delete = this.delete.bind(this);
     }
 
     componentDidMount() {
@@ -76,7 +77,12 @@ export class Approval extends Component<IProps, IState> {
         window.location.reload();
     }
 
-    delete = () => {
-
+    async delete(id:string) {
+        this.setState({ isBusy: true });
+        const response = await fetch('resource/deleteResource/' + id, {
+            method: 'POST'
+        });
+        window.location.reload();
+        
     }
 }

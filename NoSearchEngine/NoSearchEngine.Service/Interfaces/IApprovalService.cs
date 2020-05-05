@@ -10,6 +10,6 @@ namespace NoSearchEngine.Service.Interfaces
     public interface IApprovalService
     {
         IEnumerable<Resource> GetApprovalSiteList();
-        Task<DataResult<Resource>> ApproveResource(string id);
+        Task<DataResult<Resource>> ApproveResource(string id, string subjectId);
     }
 }
