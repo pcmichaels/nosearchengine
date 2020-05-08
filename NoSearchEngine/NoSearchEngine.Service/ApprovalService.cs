@@ -10,9 +10,9 @@ namespace NoSearchEngine.Service
 {
     public class ApprovalService: IApprovalService
     {
-        private readonly IResourceDataAccess _resourceDataAccess;
+        private readonly IResourceRepository _resourceDataAccess;
 
-        public ApprovalService(IResourceDataAccess resourceDataAccess)
+        public ApprovalService(IResourceRepository resourceDataAccess)
         {
             _resourceDataAccess = resourceDataAccess;
         }

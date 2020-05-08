@@ -15,7 +15,7 @@ namespace NoSearchEngine.UnitTests.Service
             string searchText = "should exist";
             string expectedResult = "this test should exist";
 
-            var resourceDataAccess = Substitute.For<IResourceDataAccess>();
+            var resourceDataAccess = Substitute.For<IResourceRepository>();
             var resultSet = Data.SearchResults.GetSingleSearchResult(expectedResult);
             resourceDataAccess.SearchAll(searchText)
                 .Returns(resultSet);

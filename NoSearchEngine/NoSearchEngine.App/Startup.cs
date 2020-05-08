@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using NoSearchEngine.App.Authorization;
 using NoSearchEngine.DataAccess;
 using NoSearchEngine.Service;
 using NoSearchEngine.Service.Interfaces;
@@ -44,11 +45,11 @@ namespace NoSearchEngine.App
                 })
                 .AddIdentityServerJwt();
 
+            services.AddScoped<IAuthorizationHandler, ApproverAuthHandler>();
+
             services.AddAuthorization(o =>
             {
-                o.DefaultPolicy = new AuthorizationPolicyBuilder()
-                    .RequireAuthenticatedUser()
-                    .Build();
+                o.AddPolicy("Approver", a => a.Requirements.Add(new ApproverAuthRequirement(100)));
             });
 
             services.AddIdentityServer()
@@ -69,7 +70,8 @@ namespace NoSearchEngine.App
             services.AddScoped<IApprovalService, ApprovalService>();
             services.AddScoped<IUserService, UserService>();
 
-            services.AddScoped<IResourceDataAccess, ResourceDataAccess>();
+            services.AddScoped<IResourceRepository, ResourceRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
 
             services.AddScoped<IFindMetaData, FindMetaData>(a =>
             {

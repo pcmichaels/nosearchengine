@@ -7,9 +7,9 @@ namespace NoSearchEngine.Service
 {
     public class SearchService : ISearchService
     {
-        private readonly IResourceDataAccess _resourceDataAccess;
+        private readonly IResourceRepository _resourceDataAccess;
 
-        public SearchService(IResourceDataAccess resourceDataAccess)
+        public SearchService(IResourceRepository resourceDataAccess)
         {
             _resourceDataAccess = resourceDataAccess;
         }

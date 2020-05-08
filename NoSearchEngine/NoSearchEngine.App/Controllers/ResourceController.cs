@@ -48,10 +48,12 @@ namespace NoSearchEngine.App.Controllers
         }
 
         [HttpGet()]
+        [Authorize(Policy = "Approver")]
         public IEnumerable<Resource> ApprovalList() =>
             _approvalService.GetApprovalSiteList();
 
         [HttpPost("{id}")]
+        [Authorize(Policy = "Approver")]
         public async Task<IActionResult> ApproveResource(string id)
         {
             string subjectId = _userService.GetSubjectId(User);
@@ -64,6 +66,7 @@ namespace NoSearchEngine.App.Controllers
         }
 
         [HttpPost("{id}")]
+        [Authorize(Policy = "Approver")]
         public async Task<IActionResult> DeleteResource(string id)
         {
             string subjectId = _userService.GetSubjectId(User);

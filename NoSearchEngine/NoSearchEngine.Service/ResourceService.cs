@@ -8,10 +8,10 @@ namespace NoSearchEngine.Service
 {
     public class ResourceService : IResourceService
     {
-        private readonly IResourceDataAccess _resourceDataAccess;
+        private readonly IResourceRepository _resourceDataAccess;
         private readonly IFindMetaData _findMetaData;
 
-        public ResourceService(IResourceDataAccess resourceDataAccess,
+        public ResourceService(IResourceRepository resourceDataAccess,
             IFindMetaData findMetaData)
         {
             _resourceDataAccess = resourceDataAccess;

@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace NoSearchEngine.DataAccess
 {
-    public class ResourceDataAccess : IResourceDataAccess
+    public class ResourceRepository : IResourceRepository
     {
         private readonly NoSearchDbContext _noSearchDbContext;
 
-        public ResourceDataAccess(NoSearchDbContext noSearchDbContext)
+        public ResourceRepository(NoSearchDbContext noSearchDbContext)
         {
             _noSearchDbContext = noSearchDbContext;
         }

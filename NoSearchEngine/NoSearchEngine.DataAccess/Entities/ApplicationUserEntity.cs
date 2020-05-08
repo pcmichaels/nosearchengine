@@ -6,5 +6,6 @@ namespace NoSearchEngine.DataAccess
     [Table("ApplicationUser")]
     public class ApplicationUserEntity : IdentityUser
     {
+        public int UserRating { get; set; }
     }
 }

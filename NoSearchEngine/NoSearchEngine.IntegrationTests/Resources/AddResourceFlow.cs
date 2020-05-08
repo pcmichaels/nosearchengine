@@ -21,7 +21,7 @@ namespace NoSearchEngine.IntegrationTests.Resources
     public class AddResourceFlow
     {
         NoSearchDbContext _noSearchDbContext;
-        IResourceDataAccess _resourceDataAccess;
+        IResourceRepository _resourceDataAccess;
         IApprovalService _approvalService;
 
         public AddResourceFlow()
@@ -43,7 +43,7 @@ namespace NoSearchEngine.IntegrationTests.Resources
 
         private void SetupClasses()
         {
-            _resourceDataAccess = new ResourceDataAccess(_noSearchDbContext);
+            _resourceDataAccess = new ResourceRepository(_noSearchDbContext);
             _approvalService = new ApprovalService(_resourceDataAccess);
         }
 
