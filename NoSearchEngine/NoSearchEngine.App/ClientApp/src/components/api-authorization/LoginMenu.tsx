@@ -54,6 +54,10 @@ export class LoginMenu extends Component<IProps, IState> {
             isAuthenticated,
             userName: user && user.name
         });                
+
+        if (isAuthenticated) {
+            //this.props.afterAuthenticated();
+        }
     }
 
     render() {       
