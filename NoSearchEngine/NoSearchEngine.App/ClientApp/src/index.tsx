@@ -5,13 +5,20 @@ import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
-const baseUrl = document.getElementsByTagName('base')[0].getAttribute('href');
+import { Provider } from 'react-redux';
+
+import store from './State/Store';
+
+const baseUrl : string | undefined = document.getElementsByTagName('base')[0].getAttribute('href') ?? undefined;
 const rootElement = document.getElementById('root');
 
+
 ReactDOM.render(
-  <BrowserRouter basename={baseUrl}>
-    <App />
-  </BrowserRouter>,
+  <Provider store={store}>
+    <BrowserRouter basename={baseUrl}>
+      <App />
+    </BrowserRouter>
+  </Provider>,
   rootElement);
 
 registerServiceWorker();

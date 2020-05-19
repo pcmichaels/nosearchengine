@@ -4,24 +4,38 @@ import { Link } from 'react-router-dom';
 import { LoginMenu } from './api-authorization/LoginMenu';
 import './NavMenu.css';
 
+import store, { IStore } from '../State/Store';
+import { connect } from 'react-redux';
 
-interface INavMenuProps {
+interface INavMenuStateProps {
+  userRating: number;
+}
+
+interface INavMenuOwnProps {
 
 }
+
+interface INavMenuDispatchProps {
+
+}
+
+type Props = INavMenuOwnProps & INavMenuStateProps & INavMenuDispatchProps;
 
 interface IState {
-  collapsed: boolean
+  collapsed: boolean,
+  isUserApprover: boolean
 }
 
-export class NavMenu extends Component<INavMenuProps, IState> {
+class NavMenu extends Component<Props, IState> {
   static displayName = NavMenu.name;
 
-  constructor (props: INavMenuProps) {
+  constructor (props: Props) {
     super(props);
 
     this.toggleNavbar = this.toggleNavbar.bind(this);
     this.state = {
-      collapsed: true
+      collapsed: true,
+      isUserApprover: false
     };
   }
 
@@ -49,9 +63,11 @@ export class NavMenu extends Component<INavMenuProps, IState> {
                 <NavItem className="custom-nav">
                   <NavLink tag={Link} className="text-dark" to="/mySites">My Sites</NavLink>
                 </NavItem>
-                <NavItem className="custom-nav">
-                  <NavLink tag={Link} className="text-dark" to="/approval">Approval</NavLink>
-                </NavItem>
+                { this.props.userRating >= 100 &&
+                  <NavItem className="custom-nav">
+                    <NavLink tag={Link} className="text-dark" to="/approval">Approval</NavLink>
+                  </NavItem>
+                }
 
                 <LoginMenu>
                 </LoginMenu>
@@ -64,3 +80,14 @@ export class NavMenu extends Component<INavMenuProps, IState> {
     );
   }
 }
+
+function mapStateToProps(state: IStore) {
+  return {
+    userRating: state.userRating
+  };
+}
+
+export default connect(mapStateToProps)(NavMenu);
+
+
+

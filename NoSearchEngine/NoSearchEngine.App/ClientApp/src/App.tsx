@@ -9,16 +9,17 @@ import { ApplicationPaths } from './components/api-authorization/ApiAuthorizatio
 import { AddSiteSuccess } from './components/AddSiteSuccess';
 import { AddSiteFailure } from './components/AddSiteFailure';
 import { Approval } from './components/Approval';
+import { MySites } from './components/MySites';
 
 import './custom.css'
 import 'bootstrap/dist/css/bootstrap.css'
-import { MySites } from './components/MySites';
 
 export default class App extends Component {
   static displayName = App.name;        
 
   render () {
     return (
+
       <Layout>
         <Route exact path='/' component={Home} />        
         <AuthorizeRoute path='/addSite' component={AddSite} />
@@ -29,6 +30,7 @@ export default class App extends Component {
         <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
 
       </Layout>
+    
     );
   }
 }

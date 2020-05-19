@@ -4,8 +4,10 @@ import { Link } from 'react-router-dom';
 import authService from './AuthorizeService';
 import { ApplicationPaths } from './ApiAuthorizationConstants';
 
-interface IProps {
+import store from '../../State/Store';
+import { GET_USER_DATA } from '../../State/Actions';
 
+interface IProps {    
 }
 
 interface IState {
@@ -56,7 +58,14 @@ export class LoginMenu extends Component<IProps, IState> {
         });                
 
         if (isAuthenticated) {
-            //this.props.afterAuthenticated();
+            store.dispatch({
+                type: GET_USER_DATA,
+                payload: {
+                    user: user.name,
+                    message: user,
+                    timestamp: new Date().getTime()
+                }
+            });
         }
     }
 
