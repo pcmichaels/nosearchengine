@@ -1,9 +1,9 @@
 import React from 'react';
-import { IData } from './Interfaces/IData';
+import { IResourceData } from './Interfaces/IResourceData';
 import SimpleButton from './Base/SimpleButton';
 
 type ResourceListProps = {
-    data: IData[]
+    data: IResourceData[]
 
 }
 

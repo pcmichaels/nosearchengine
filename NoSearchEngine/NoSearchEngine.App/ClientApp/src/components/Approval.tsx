@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { IData } from './Interfaces/IData';
+import { IResourceData } from './Interfaces/IResourceData';
 import { IAction } from './Interfaces/IAction';
 import ResourceList from './ResourceList';
 
@@ -10,7 +10,7 @@ interface IState {
     isLoading: boolean;
     isBusy: boolean;
     isDataAvailable: boolean;
-    approvalList: IData[];
+    approvalList: IResourceData[];
   }
 
 export class Approval extends Component<IProps, IState> {
@@ -47,7 +47,7 @@ export class Approval extends Component<IProps, IState> {
     async loadApprovalList() {
         this.setState({ isBusy: true });
         const response = await fetch('resource/approvalList/');
-        const jsondata: IData[] = await response.json();
+        const jsondata: IResourceData[] = await response.json();
 
         const approveAction: IAction = {
             action: this.approve,
@@ -71,7 +71,7 @@ export class Approval extends Component<IProps, IState> {
 
     async approve(id: string) {
         this.setState({ isBusy: true });
-        const response = await fetch('resource/approveResource/' + id, {
+        await fetch('resource/approveResource/' + id, {
             method: 'POST'
         });
         window.location.reload();
@@ -79,7 +79,7 @@ export class Approval extends Component<IProps, IState> {
 
     async delete(id:string) {
         this.setState({ isBusy: true });
-        const response = await fetch('resource/deleteResource/' + id, {
+        await fetch('resource/deleteResource/' + id, {
             method: 'POST'
         });
         window.location.reload();

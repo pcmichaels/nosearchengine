@@ -1,6 +1,6 @@
 import { IAction } from './IAction';
 
-export interface IData {    
+export interface IResourceData {    
     id: string;
     url: string;
     title: string;

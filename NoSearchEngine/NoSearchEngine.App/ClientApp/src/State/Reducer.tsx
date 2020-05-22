@@ -1,20 +1,20 @@
-import { InitialState } from './Store';
-import { ActionTypes, GET_USER_DATA } from './Actions';
+import { InitialState, IStore } from './Store';
+import { ActionTypes, GET_USER_DATA, GetUserDataActionType } from './Types';
 
-export function reducer(state = InitialState, action: ActionTypes) {  
+export function reducer(state: IStore = InitialState, action: GetUserDataActionType) : IStore {  
     console.log (action);
     switch (action.type) {
       case GET_USER_DATA:
-        return {
-            ...state,
-            userRating: state.userRating + parseInt(action.payload.message)
-        }
 
-        
-        
+        console.log('GET_USER_DATA Reducer; user: ' + action.payload);
+
+        return {
+          ...state,
+          userRating: action.payload.userRating
+        }  
+
       default:
         return state;
   
     }           
-  }
-  
+}

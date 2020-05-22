@@ -3,7 +3,7 @@ import ShortEditTextBox from './Base/ShortEditTextBox';
 import LongEditTextBox from './Base/LongEditTextBox';
 import SimpleButton from './Base/SimpleButton';
 import debounce from 'lodash.debounce';
-import { IData } from './Interfaces/IData';
+import { IResourceData } from './Interfaces/IResourceData';
 
 interface IProps {    
 }
@@ -90,7 +90,7 @@ export class AddSite extends Component<IProps, IState> {
 
     const response = await fetch('webinfo/site/' + encodedUrl);
     if (response.status === 200) {
-      const jsondata: IData = await response.json();
+      const jsondata: IResourceData = await response.json();
 
       // Update state
       this.setState( {

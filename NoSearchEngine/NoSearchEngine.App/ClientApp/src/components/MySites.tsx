@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import ResourceList from './ResourceList';
-import { IData } from './Interfaces/IData';
+import { IResourceData } from './Interfaces/IResourceData';
 
 interface IProps {    
 }
 
 interface IState {
     isLoading: boolean;
-    resources: IData[];
+    resources: IResourceData[];
     isDataAvailable: boolean;
 }
   
@@ -48,7 +48,7 @@ export class MySites extends Component<IProps, IState> {
     async loadMySites() {
         this.setState({ isLoading: true });
         const response = await fetch('resource/mySites');
-        const jsondata: IData[] = await response.json();
+        const jsondata: IResourceData[] = await response.json();
         if (jsondata.length !== 0) {
           this.setState({ resources: jsondata, isLoading: false, isDataAvailable: true });
         } else {

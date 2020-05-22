@@ -4,10 +4,13 @@ import { Link } from 'react-router-dom';
 import authService from './AuthorizeService';
 import { ApplicationPaths } from './ApiAuthorizationConstants';
 
-import store from '../../State/Store';
-import { GET_USER_DATA } from '../../State/Actions';
+import { GetUserData } from '../../State/Actions';
+import { connect } from 'react-redux';
+import { Dispatch, AnyAction } from 'redux';
+import { ThunkDispatch } from 'redux-thunk';
 
 interface IProps {    
+    GetUserData: () => void;
 }
 
 interface IState {
@@ -24,7 +27,7 @@ interface IPathState {
     local: boolean
 }
 
-export class LoginMenu extends Component<IProps, IState> {
+class LoginMenu extends Component<IProps, IState> {
     private _subscription: number = 0;
 
     constructor(props: IProps) {
@@ -58,14 +61,8 @@ export class LoginMenu extends Component<IProps, IState> {
         });                
 
         if (isAuthenticated) {
-            store.dispatch({
-                type: GET_USER_DATA,
-                payload: {
-                    user: user.name,
-                    message: user,
-                    timestamp: new Date().getTime()
-                }
-            });
+            console.log('Authenticated - call GetUserData')
+            this.props.GetUserData();
         }
     }
 
@@ -107,3 +104,14 @@ export class LoginMenu extends Component<IProps, IState> {
         </Fragment>);        
     }
 }
+
+const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AnyAction>) => {
+    console.log('mapDispatchToProps');
+      
+    return {
+        GetUserData: () => dispatch(GetUserData())
+    };
+}
+  
+export default connect(null, mapDispatchToProps)(LoginMenu);
+  
