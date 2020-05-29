@@ -30,6 +30,8 @@ namespace NoSearchEngine.App
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddApplicationInsightsTelemetry();
+
             services.AddDbContext<NoSearchDbContext>(a =>
                 a.UseSqlServer(Configuration.GetConnectionString("SqlConnectionString")));
 
@@ -79,7 +81,7 @@ namespace NoSearchEngine.App
                 var client = factory.CreateClient();
                 var wrapper = new DefaultHttpClientWrapper(client);
                 return new FindMetaData(wrapper);
-            });
+            });            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -11,7 +11,7 @@ interface IState {
   isLoading: boolean;
   searchText: string;  
   isBusy: boolean;
-  isDataAvailable: boolean;
+  isDataAvailable: number;
 }
 
 export class Home extends Component<IProps, IState> {
@@ -24,7 +24,7 @@ export class Home extends Component<IProps, IState> {
       isLoading: true,
       searchText: '',
       isBusy: false,
-      isDataAvailable: false
+      isDataAvailable: 0
     };
 
     this.updateSearchText = this.updateSearchText.bind(this);
@@ -34,22 +34,33 @@ export class Home extends Component<IProps, IState> {
   render () {
     return (                 
       <div>
-        {this.state.isDataAvailable &&
+        {this.state.isDataAvailable === 0 &&        
+          <div className="centreLayout">
+              <Search searchAction={this.runSearch}
+                searchTextUpdateAction={this.updateSearchText}
+                isBusy={this.state.isBusy}
+                status={""} />
+          </div>
+        }
+
+        {this.state.isDataAvailable === 1 &&
           <div>
             <Search searchAction={this.runSearch}
               searchTextUpdateAction={this.updateSearchText}
-              isBusy={this.state.isBusy} />
+              isBusy={this.state.isBusy} 
+              status={""} />
 
             <ResourceList data={this.state.searchResults} />
           </div>
         }
 
-        {!this.state.isDataAvailable &&
-          <div className="centreLayout">
-              <Search searchAction={this.runSearch}
-                searchTextUpdateAction={this.updateSearchText}
-                isBusy={this.state.isBusy} />
-          </div>
+        {this.state.isDataAvailable === 2 &&           
+            <div className="centreLayout">
+                <Search searchAction={this.runSearch}
+                  searchTextUpdateAction={this.updateSearchText}
+                  isBusy={this.state.isBusy}
+                  status={"Unable to find data"} />
+            </div>          
         }
       </div>
     );
@@ -60,13 +71,19 @@ export class Home extends Component<IProps, IState> {
   }
 
   async runSearch(e: React.MouseEvent<HTMLButtonElement>) {
+    debugger;
     this.setState({ isBusy: true });
     const response = await fetch('resource/search/' + this.state.searchText);
-    const jsondata: IResourceData[] = await response.json();
-    if (jsondata.length !== 0) {
-      this.setState({ searchResults: jsondata, isLoading: false, isBusy: false, isDataAvailable: true });
+    const size = Object.keys(response).length;
+    if (size === 0) {
+      this.setState({ searchResults: [], isLoading: false, isBusy: false, isDataAvailable: 2 });
     } else {
-      this.setState({ searchResults: [], isLoading: false, isBusy: false, isDataAvailable: false });
+      const jsondata: IResourceData[] = await response.json();
+      if (jsondata.length !== 0) {
+        this.setState({ searchResults: jsondata, isLoading: false, isBusy: false, isDataAvailable: 1 });
+      } else {
+        this.setState({ searchResults: [], isLoading: false, isBusy: false, isDataAvailable: 2 });
+      }
     }
   }
 }
