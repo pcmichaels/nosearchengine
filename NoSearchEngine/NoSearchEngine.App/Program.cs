@@ -3,6 +3,7 @@ using Microsoft.Extensions.Hosting;
 using Azure.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Configuration.AzureKeyVault;
+using NoSearchEngine.App.Helpers;
 
 namespace NoSearchEngine.App
 {
@@ -20,6 +21,11 @@ namespace NoSearchEngine.App
                     webBuilder
                         .ConfigureAppConfiguration((hostingContext, config) =>
                         {
+                            if (hostingContext.HostingEnvironment.IsLocalDevelopment())
+                            {
+                                config.AddUserSecrets<Program>();
+                            }
+
                             var settings = config.Build();
                             var defaultAzureCredentialsOptions = new DefaultAzureCredentialOptions();                            
 

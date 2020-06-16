@@ -36,7 +36,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Assets\nosearch.pfx" />
     <None Remove="ClientApp\src\components\NavMenu.tsx" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Assets\nosearch.pfx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>

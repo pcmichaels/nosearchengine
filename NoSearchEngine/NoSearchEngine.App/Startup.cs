@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -15,14 +14,18 @@ using NoSearchEngine.Service.Interfaces;
 using System.Net.Http;
 using WebSiteMeta.Scraper;
 using WebSiteMeta.Scraper.HttpClientWrapper;
+using NoSearchEngine.App.Helpers;
 
 namespace NoSearchEngine.App
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        private readonly IWebHostEnvironment _env;
+
+        public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
             Configuration = configuration;
+            _env = env;
         }
 
         public IConfiguration Configuration { get; }
@@ -54,8 +57,13 @@ namespace NoSearchEngine.App
                 o.AddPolicy("Approver", a => a.Requirements.Add(new ApproverAuthRequirement(100)));
             });
 
-            services.AddIdentityServer()
+            var identityBuilder = services.AddIdentityServer()
                 .AddApiAuthorization<ApplicationUserEntity, NoSearchDbContext>();
+
+            if (_env.IsLocalDevelopment())            
+            {
+                identityBuilder.AddSigningCredentials();
+            }
 
             services.AddControllersWithViews();
             services.AddRazorPages();
@@ -85,9 +93,9 @@ namespace NoSearchEngine.App
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app)
         {
-            if (env.IsDevelopment())
+            if (_env.IsDevelopment() || _env.IsLocalDevelopment())            
             {
                 app.UseDeveloperExceptionPage();
             }
@@ -121,7 +129,7 @@ namespace NoSearchEngine.App
             {
                 spa.Options.SourcePath = "ClientApp";
 
-                if (env.IsDevelopment())
+                if (_env.IsLocalDevelopment())
                 {
                     spa.UseReactDevelopmentServer(npmScript: "start");
                 }

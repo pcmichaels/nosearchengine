@@ -15,7 +15,13 @@ namespace NoSearchEngine.DataAccess
 
         public int GetUserRating(string subjectId)
         {
-            var user = _noSearchDbContext.Users.Find(subjectId);            
+            var user = _noSearchDbContext.Users.Find(subjectId);
+            if (user == null)
+            {
+                // This can happen if the user is authenticated, 
+                // but removed from the system
+                return 0; 
+            }
             return user.UserRating;
         }
     }

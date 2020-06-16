@@ -20,8 +20,9 @@
       "launchBrowser": true,
       "environmentVariables": {
         "AZURE_CLIENT_SECRET": "f72d2dd4-5c46-4ada-80c0-1dce37a09979",
+        "ASPNETCORE_DETAILEDERRORS": "true",
         "AZURE_CLIENT_ID": "81d79a47-52c5-4917-a421-0d6835fb8453",
-        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ASPNETCORE_ENVIRONMENT": "LocalDevelopment",
         "AZURE_TENANT_ID": "03510b8c-63d4-414d-8e1e-a4cbd8bdeb99"
       },
       "applicationUrl": "https://localhost:5011;http://localhost:5000"
