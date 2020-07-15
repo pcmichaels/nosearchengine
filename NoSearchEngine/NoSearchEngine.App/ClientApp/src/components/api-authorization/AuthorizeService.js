@@ -173,32 +173,42 @@ export class AuthorizeService {
     redirect() {
         return { status: AuthenticationResultStatus.Redirect };
     }
-
+        
     async ensureUserManagerInitialized() {
         if (this.userManager !== undefined) {
             return;
         }
 
-        let response = await fetch(ApplicationPaths.ApiAuthorizationClientConfigurationUrl);
-        if (!response.ok) {
-            throw new Error(`Could not load settings for '${ApplicationName}'`);
+        try {
+            let response = await fetch(ApplicationPaths.ApiAuthorizationClientConfigurationUrl);
+            
+            if (!response.ok) {
+                throw new Error(`Could not load settings for '${ApplicationName}'`);
+            }
+
+            let settings = await response.json();
+            settings.automaticSilentRenew = true;
+            settings.includeIdTokenInSilentRenew = true;
+            settings.userStore = new WebStorageStateStore({
+                prefix: ApplicationName
+            });
+
+            this.userManager = new UserManager(settings);
+
+            this.userManager.events.addUserSignedOut(async () => {
+                await this.userManager.removeUser();
+                this.updateState(undefined);
+            });
+
+            this.userManager.events.addAccessTokenExpired(async () => {
+                await this.signIn();
+            });
+        } catch(error) {
+            throw new Error(`Something went wrong during the authorization: '${JSON.stringify(error)}'`);
+            //ERROR LOGGING            
         }
-
-        let settings = await response.json();
-        settings.automaticSilentRenew = true;
-        settings.includeIdTokenInSilentRenew = true;
-        settings.userStore = new WebStorageStateStore({
-            prefix: ApplicationName
-        });
-
-        this.userManager = new UserManager(settings);
-
-        this.userManager.events.addUserSignedOut(async () => {
-            await this.userManager.removeUser();
-            this.updateState(undefined);
-        });
     }
-
+    
     static get instance() { return authService }
 }
 

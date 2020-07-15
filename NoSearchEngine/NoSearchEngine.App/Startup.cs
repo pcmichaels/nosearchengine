@@ -15,6 +15,8 @@ using System.Net.Http;
 using WebSiteMeta.Scraper;
 using WebSiteMeta.Scraper.HttpClientWrapper;
 using NoSearchEngine.App.Helpers;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using System;
 
 namespace NoSearchEngine.App
 {
@@ -42,13 +44,13 @@ namespace NoSearchEngine.App
                 .AddEntityFrameworkStores<NoSearchDbContext>();
 
             services.AddAuthentication()
-                .AddTwitter(o =>
-                {
-                    o.ConsumerKey = Configuration["Authentication:Twitter:ConsumerAPIKey"];
-                    o.ConsumerSecret = Configuration["Authentication:Twitter:ConsumerSecret"];
-                    o.RetrieveUserDetails = true;
-                })
-                .AddIdentityServerJwt();
+            .AddTwitter(o =>
+            {
+                o.ConsumerKey = Configuration["Authentication:Twitter:ConsumerAPIKey"];
+                o.ConsumerSecret = Configuration["Authentication:Twitter:ConsumerSecret"];
+                o.RetrieveUserDetails = true;                
+            })
+            .AddIdentityServerJwt();
 
             services.AddScoped<IAuthorizationHandler, ApproverAuthHandler>();
 
@@ -60,10 +62,7 @@ namespace NoSearchEngine.App
             var identityBuilder = services.AddIdentityServer()
                 .AddApiAuthorization<ApplicationUserEntity, NoSearchDbContext>();
 
-            if (_env.IsLocalDevelopment())            
-            {
-                identityBuilder.AddSigningCredentials();
-            }
+            identityBuilder.AddSigningCredentials();
 
             services.AddControllersWithViews();
             services.AddRazorPages();
@@ -106,6 +105,8 @@ namespace NoSearchEngine.App
                 app.UseHsts();
             }
 
+            UpdateDatabase(app);
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
@@ -134,6 +135,17 @@ namespace NoSearchEngine.App
                     spa.UseReactDevelopmentServer(npmScript: "start");
                 }
             });
+        }
+
+        private void UpdateDatabase(IApplicationBuilder app)
+        {
+            using var serviceScope = app.ApplicationServices
+                   .GetRequiredService<IServiceScopeFactory>()
+                   .CreateScope();
+
+            using var context = serviceScope.ServiceProvider.GetService<NoSearchDbContext>();
+
+            context.Database.Migrate();
         }
     }
 }
