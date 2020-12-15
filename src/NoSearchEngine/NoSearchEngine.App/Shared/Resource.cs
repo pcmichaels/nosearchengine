@@ -11,6 +11,7 @@ namespace NoSearchEngine.App.Shared
         public ResourceType ResourceType { get; set; }
 
         public string Description { get; set; }
+        public CategoryType Category { get; set; }
     }
 
     public enum ResourceType
@@ -20,5 +21,12 @@ namespace NoSearchEngine.App.Shared
         FileDownload,
         Image,
         Video
+    }
+
+    public enum CategoryType
+    {
+        Instruction,
+        ErrorResolution,
+        Blog
     }
 }

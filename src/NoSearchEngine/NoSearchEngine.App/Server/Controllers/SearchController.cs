@@ -29,13 +29,22 @@ namespace NoSearchEngine.App.Server.Controllers
                 {
                     Url = "www.pmichaels.net",
                     Description = "Blog",
-                    ResourceType = ResourceType.TopLevelSite
+                    ResourceType = ResourceType.TopLevelSite,
+                    Category = CategoryType.Blog
                 },
                 new Resource()
                 {
                     Url = "https://www.pmichaels.net/2020/12/12/sending-a-service-bus-message-failed/",
                     Description = "Azure Service Bus Errror",
-                    ResourceType = ResourceType.SpecificUrl
+                    ResourceType = ResourceType.SpecificUrl,
+                    Category = CategoryType.ErrorResolution
+                },
+                new Resource()
+                {
+                    Url = "https://stackoverflow.com/questions/58235005/blazor-template-with-menu-across-the-top",
+                    Description = "Change Blazor default nav bar to run along the top",
+                    ResourceType = ResourceType.SpecificUrl,
+                    Category = CategoryType.Instruction
                 }
             };
         }
