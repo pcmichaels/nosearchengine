@@ -1,0 +1,42 @@
+﻿@page "/"
+@using NoSearchEngine.App.Shared
+@inject HttpClient Http
+
+<h1>Search</h1>
+
+@if (resources == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Url</th>
+                <th>Description</th>
+                <th>ResourceType</th>                
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var resource in resources)
+            {
+                <tr>
+                    <td>@resource.Url</td>
+                    <td>@resource.Description</td>
+                    <td>@resource.ResourceType</td>                    
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private Resource[] resources;
+
+    protected override async Task OnInitializedAsync()
+    {
+        resources = await Http.GetFromJsonAsync<Resource[]>("Search");
+    }
+
+}
